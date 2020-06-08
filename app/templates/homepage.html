@@ -13,20 +13,34 @@ Homepage
 </form>
 <br><br>
 <ul id="dex"></ul>
+<br>
+<button id="add">Load More Pokemon</button>
+
+<style>
+
+  
+  
+</style>
+
 
 <script>
   
   var pokemon = {{ pokemon | safe }}
+  var t = 99;
+  
   var display = function(e) {
-      var dex = document.getElementById("dex");
-      t = 19;
-      while (t >= 0) {
+      var dex = document.createElement("UL");
+      var d = document.getElementById("dex");
+      var p = t - 19;
+      while (t >= p) {
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
 	  var image = document.createElement("IMG");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
+	  mons.setAttribute("style", "display: table-cell;");
+	  mons.setAttribute("style", "display: table-cell;");
 	  image.setAttribute("src", i);
 	  name.innerHTML = n + " : " +  id;
 	  mons.appendChild(name);
@@ -34,11 +48,37 @@ Homepage
 	  dex.appendChild(mons);
 	  t = t - 1;
       }
-      console.log(dex);
-      
-      
+      d.append(dex);
   }
+
+  var addmons = function(e) {
+      var d = document.getElementById("dex");
+      var next = document.createElement("UL");
+      var p = t - 19;
+      console.log(t);
+      console.log(p);
+      while (t >= p) {
+	  var mons = document.createElement("DIV");
+	  var name = document.createElement("P");
+	  var image = document.createElement("IMG");
+	  n = pokemon[t][0];
+	  id = pokemon[t][1]
+	  i = pokemon[t][2];
+	  mons.setAttribute("style", "display: table-cell;");
+	  image.setAttribute("src", i);
+	  name.innerHTML = n + " : " +  id;
+	  mons.appendChild(name);
+	  mons.appendChild(image);
+	  next.appendChild(mons);
+	  t = t - 1;
+      }
+      d.appendChild(next);
+  }
+
   display()
+
+  var addbutton = document.getElementById("add");
+  addbutton.addEventListener('click', addmons);
   
 </script>
 

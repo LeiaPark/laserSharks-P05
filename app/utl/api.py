@@ -16,11 +16,11 @@ headers = {
 
 # POKE API :: the first most basic call !!!
 def getPokemon():
-    # gets the first 100 pokemon
+    # gets the num pokemon
     request = Request("https://pokeapi.co/api/v2/pokemon/?limit=100", headers=headers) 
     response = urlopen(request).read()
     data = json.loads(response)
-    m = 19
+    m = 99
     d = []
     ''' d is an array of arrays. Each array will have pokemon information in this order:
                  name, id, picture'''
