@@ -5,3 +5,8 @@ hilaryZ -- 2020-06-08 01:09
 - Added login and register system for users
 - Created basic templates
 - Added functions for interacting with the database in db_functions.py
+
+aliceN -- 2020-06-08 14:07
+- Homepage now displays first 20 pokemon
+- Modified basic API call 
+- Will work on the formatting
