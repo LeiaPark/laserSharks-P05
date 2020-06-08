@@ -5,9 +5,41 @@ Homepage
 {% endblock %}
 
 {% block body %}
+
 <h1>Homepage</h1>
 
 <form method="GET" action="/login">
   <button type="submit">Login</button>
 </form>
+<br><br>
+<ul id="dex"></ul>
+
+<script>
+  
+  var pokemon = {{ pokemon | safe }}
+  var display = function(e) {
+      var dex = document.getElementById("dex");
+      t = 19;
+      while (t >= 0) {
+	  var mons = document.createElement("DIV");
+	  var name = document.createElement("P");
+	  var image = document.createElement("IMG");
+	  n = pokemon[t][0];
+	  id = pokemon[t][1]
+	  i = pokemon[t][2];
+	  image.setAttribute("src", i);
+	  name.innerHTML = n + " : " +  id;
+	  mons.appendChild(name);
+	  mons.appendChild(image);
+	  dex.appendChild(mons);
+	  t = t - 1;
+      }
+      console.log(dex);
+      
+      
+  }
+  display()
+  
+</script>
+
 {% endblock %}

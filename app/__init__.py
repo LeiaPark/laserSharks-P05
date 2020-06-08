@@ -21,7 +21,8 @@ def index():
     if 'user' in session:
         return redirect(url_for('favorites'))
     else:
-        return render_template('homepage.html')
+        pokemon = api.getPokemon()
+        return render_template('homepage.html', pokemon=pokemon)
 
 @app.route('/login')
 def login():
