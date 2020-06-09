@@ -11,14 +11,25 @@ Homepage
 <form method="GET" action="/login">
   <button type="submit">Login</button>
 </form>
+<form method="GET" action="/favorites">
+  <button type="submit">Favorite Pokemon</button>
+</form>
+
+
 <br><br>
-<ul id="dex"></ul>
-<br>
-<button id="add">Load More Pokemon</button>
+<center>
+  <div id="dex" class="dex"></div>
+  <br>
+  <button id="add">Load More Pokemon</button>
+</center>
 
 <style>
 
-  
+  .dex {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 10px;
+  }
   
 </style>
 
@@ -29,7 +40,7 @@ Homepage
   var t = 99;
   
   var display = function(e) {
-      var dex = document.createElement("UL");
+      //var dex = document.createElement("UL");
       var d = document.getElementById("dex");
       var p = t - 19;
       while (t >= p) {
@@ -39,16 +50,16 @@ Homepage
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
-	  mons.setAttribute("style", "display: table-cell;");
-	  mons.setAttribute("style", "display: table-cell;");
+	  //mons.setAttribute("style", "display: grid;");
 	  image.setAttribute("src", i);
-	  name.innerHTML = n + " : " +  id;
-	  mons.appendChild(name);
+	  name.innerHTML = n + "   #" +  id;
+	  mons.appendChild(name)
 	  mons.appendChild(image);
-	  dex.appendChild(mons);
+	  d.appendChild(mons);
 	  t = t - 1;
       }
-      d.append(dex);
+      //d.append(dex);
+      console.log(d);
   }
 
   var addmons = function(e) {
@@ -64,15 +75,13 @@ Homepage
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
-	  mons.setAttribute("style", "display: table-cell;");
 	  image.setAttribute("src", i);
-	  name.innerHTML = n + " : " +  id;
+	  name.innerHTML = n + "   #" +  id;
 	  mons.appendChild(name);
 	  mons.appendChild(image);
-	  next.appendChild(mons);
+	  d.appendChild(mons);
 	  t = t - 1;
       }
-      d.appendChild(next);
   }
 
   display()

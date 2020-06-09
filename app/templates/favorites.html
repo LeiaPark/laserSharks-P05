@@ -10,4 +10,49 @@ Favorites
 <form method="GET" action="/logout" >
   <input type="submit" value="Logout">
 </form>
+
+<br><br>
+<center>
+  <div id="dex" class="dex"></div>
+</center>
+
+<style>
+
+  .dex {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 10px;
+  }
+  
+</style>
+
+<script>
+
+  var favorites = {{ favorites | safe }};
+  console.log(favorites);
+  var pokemons = {{ pokemon | safe }};
+  var t = 99;
+  var d = document.getElementById("dex");
+
+  for(var i = 0; i <= 99; i++) {
+      if (favorites.includes(pokemons[i][1])) {
+	  var mons = document.createElement("DIV");
+	  var image = document.createElement("IMG");
+	  n = pokemons[i][0];
+	  id = pokemons[i][1];
+	  im = pokemons[i][2];
+	  image.setAttribute("src", im);
+	  //var name = document.createTextNode(n + "    #" + id);
+	  //mons.appendChild(name);
+	  mons.appendChild(image);
+	  d.appendChild(mons);
+      };
+  };
+  
+  
+
+</script>
+
+  
+  
 {% endblock %}

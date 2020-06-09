@@ -18,20 +18,21 @@ app.secret_key = os.urandom(24)
 @app.route('/')
 def index():
     # load the template with the user's session info
-    if 'user' in session:
-        return redirect(url_for('favorites'))
-    else:
-        pokemon = api.getPokemon()
-        return render_template('homepage.html', pokemon=pokemon)
+    #if 'user' in session:
+    #    return redirect(url_for('index'))
+    #else:
+    pokemon = api.getPokemon()
+    return render_template('homepage.html', pokemon=pokemon)
 
 @app.route('/login')
 def login():
     if 'user' in session:
-        return redirect(url_for('favorites'))
+        return redirect(url_for("index"))
     elif request.args:
         if db_functions.checkfor_credentials(request.args.get('username'), request.args.get('password')):
             session['user'] = request.args.get('username')
-            return redirect(url_for('favorites'))
+            session['id'] = db_functions.get_user_id(request.args.get('username'))
+            return redirect(url_for('index'))
         else:
             flash('Invalid Credentials')
             return redirect(url_for('login'))
@@ -41,7 +42,7 @@ def login():
 @app.route('/register')
 def register():
     if 'user' in session:
-        return redirect(url_for('favorites'))
+        return redirect(url_for('index'))
     elif request.args:
         if db_functions.checkfor_username(request.args.get('username')):
             flash('Account with that username already exists')
@@ -54,7 +55,13 @@ def register():
 
 @app.route('/favorites')
 def favorites():
-    return render_template('favorites.html')
+    if 'user' in session:
+        pokemon = api.getPokemon()
+        return render_template('favorites.html',
+                               favorites=db_functions.get_favs(session['id']),
+                               pokemon=pokemon)
+    else:
+        return render_template('login.html')
 
 @app.route('/logout')
 def logout():

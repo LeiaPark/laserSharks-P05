@@ -14,7 +14,7 @@ def create():
     create_table_users = "CREATE TABLE IF NOT EXISTS users(user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT);"
     insert_user = "INSERT OR IGNORE INTO users(user_id, username, password) VALUES( 1, \"admin\", \"stuy\");"
     create_table_favorites = "CREATE TABLE IF NOT EXISTS favorites(user_id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT);"
-    insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"1\");"
+    insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"2\");"
 
     c.execute(create_table_users)
     c.execute(insert_user)
@@ -66,3 +66,12 @@ def get_user_id(username):
     db.commit()  # save changes
     db.close()  # close database
     return response
+
+def get_favs(user_id):
+    faves = []
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT list FROM favorites WHERE favorites.user_id == ?;", (user_id[0]))
+    for f in c.fetchall():
+        faves.append(int(f[0]))
+    return faves
