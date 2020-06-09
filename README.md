@@ -21,7 +21,7 @@ git clone git@github.com:LeiaPark/laserSharks-P05.git
 2. Enter the repo and install the necessary packages:
 ```
 cd laserSharks-P05/
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 ⚠️ If pip install does not work, activate a virtual environment and install within it ⚠️
 ```
@@ -29,8 +29,9 @@ python3 -m venv myvenv
 . myvenv/bin/activate
 pip3 install -r requirements.txt
 ```
-3. Run the Flask app:
+3. Enter the app folder and run the Flask app:
 ```
+cd app/
 python3 __init__.py
 ```
 4. Go to http://localhost:5000/ 
