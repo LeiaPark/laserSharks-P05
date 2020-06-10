@@ -40,7 +40,7 @@ Homepage
 <script>
   
   var pokemon = {{ pokemon | safe }}
-  var t = 99;
+  var t = 250;
   
   var display = function(e) {
       //var dex = document.createElement("UL");
@@ -97,12 +97,9 @@ Homepage
 	      form.addEventListener('submit', (event) => {
 		  //console.log(this.getAttribute("value"));
 		  pid.value = this.getAttribute("value");
-		  console.log(pid.value);
-		  //event.preventDefault();
 	      });
-	      //form.submit();
-	  }
-	  //button.addEventListener("click",add_fav());	  
+	      button.disabled = true;
+	  };  
 	  d.appendChild(mons);
 	  
       }

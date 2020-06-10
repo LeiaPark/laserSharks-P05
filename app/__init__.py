@@ -17,13 +17,24 @@ from utl import api, db_functions #create_db
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+db_functions.create()
+if db_functions.check1():
+    print("ADDING GENERATION 1...")
+    db_functions.add_gen1(api.get_gen1())
+if db_functions.check2():
+    print("ADDING GENERATION 2...")
+    db_functions.add_gen2(api.get_gen2())
+
+mons = db_functions.retrieve_gen2() + db_functions.retrieve_gen1()
+print(len(mons))
+
 @app.route('/')
 def index():
     # load the template with the user's session info
     #if 'user' in session:
     #    return redirect(url_for('index'))
     #else:
-    pokemon = api.getPokemon()
+    pokemon = mons #db_functions.retrieve_gen1()
     return render_template('homepage.html', pokemon=pokemon)
 
 @app.route('/login')
@@ -58,8 +69,7 @@ def register():
 @app.route('/favorites')
 def favorites():
     if 'user' in session:
-        pokemon = api.getPokemon()
-        print(request.args)
+        pokemon = db_functions.retrieve_gen1()
         return render_template('favorites.html',
                                favorites=db_functions.get_favs(session['id']),
                                pokemon=pokemon)
@@ -71,7 +81,9 @@ def add():
     if 'user' in session:
         db_functions.add_fave(session['id'],request.args.get('pokemon_id'))
         flash('Added to Favorites')
-    return redirect(url_for('login'))
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
