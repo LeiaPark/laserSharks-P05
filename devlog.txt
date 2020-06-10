@@ -10,3 +10,6 @@ aliceN -- 2020-06-08 14:07
 - Homepage now displays first 20 pokemon
 - Modified basic API call 
 - Will work on the formatting
+
+leiaP -- 2020-06-10 13:38
+- Grouped imports as instructed
