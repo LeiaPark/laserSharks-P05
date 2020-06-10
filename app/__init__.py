@@ -27,7 +27,7 @@ def index():
 @app.route('/login')
 def login():
     if 'user' in session:
-        return redirect(url_for("index"))
+        return redirect(url_for('index'))
     elif request.args:
         if db_functions.checkfor_credentials(request.args.get('username'), request.args.get('password')):
             session['user'] = request.args.get('username')
@@ -57,11 +57,19 @@ def register():
 def favorites():
     if 'user' in session:
         pokemon = api.getPokemon()
+        print(request.args)
         return render_template('favorites.html',
                                favorites=db_functions.get_favs(session['id']),
                                pokemon=pokemon)
     else:
         return render_template('login.html')
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if 'user' in session:
+        db_functions.add_fave(session['id'],request.args.get('pokemon_id'))
+        flash('Added to Favorites')
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():

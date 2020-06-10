@@ -18,8 +18,11 @@ Homepage
 
 <br><br>
 <center>
-  <div id="dex" class="dex"></div>
-  <br>
+  <form method="GET" action="/add" id="f">
+    <input type="number" name="pokemon_id" style="display: none;"/>
+    <div id="dex" class="dex"></div>
+    <br>
+  </form>
   <button id="add">Load More Pokemon</button>
 </center>
 
@@ -47,16 +50,61 @@ Homepage
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
 	  var image = document.createElement("IMG");
+	  var button = document.createElement("BUTTON");
+	  var par = document.createElement("P");
 	  n = pokemon[t][0];
-	  id = pokemon[t][1]
+	  id = pokemon[t][1];
 	  i = pokemon[t][2];
-	  //mons.setAttribute("style", "display: grid;");
+	  image.setAttribute("value",id);
+	  //image.setAttribute("type","image");
 	  image.setAttribute("src", i);
+	  /*
+	  image.setAttribute("onclick", "return false;");
+	  image.setAttribute("ondblclick", "return false;");
+	  image.ondblclick = function() {
+	      //var input = document.createElement("INPUT");
+	      var form = document.createElement("FORM");
+	      var input = document.createElement("INPUT");
+	      //console.log(this.getAttribute("value"));
+	      input.setAttribute("type","number");
+	      input.setAttribute("id","yee");
+	      input.setAttribute("value", this.getAttribute("value"));
+	      this.appendChild(input);
+	      //image.appendChild(input);
+	      //document.getElementById("f").appendChild(input);
+	      //document.getElementById("f").submit();
+	      form.setAttribute("action","/add");
+	      form.setAttribute("method","POST");
+	      //console.log(this);
+	      form.appendChild(this);
+	      document.getElementById("f").submit();
+	      //return this.getAttribute("value");
+	  };
+*/
+	  //mons.setAttribute("style", "display: grid;");
 	  name.innerHTML = n + "   #" +  id;
-	  mons.appendChild(name)
+	  button.innerHTML = "Add to Favorites";
+	  button.setAttribute("value",id);
+	  mons.appendChild(name);
 	  mons.appendChild(image);
-	  d.appendChild(mons);
+	  mons.appendChild(par);
+	  mons.appendChild(button);
 	  t = t - 1;
+
+	  button.onclick = function() {
+	      var form = document.getElementById("f");
+	      var pid = form.elements['pokemon_id'];
+	      form.addEventListener('submit', (event) => {
+		  //console.log(this.getAttribute("value"));
+		  pid.value = this.getAttribute("value");
+		  console.log(pid.value);
+		  //event.preventDefault();
+	      });
+	      //form.submit();
+	  }
+	  //button.addEventListener("click",add_fav());	  
+	  d.appendChild(mons);
+	  
       }
       //d.append(dex);
       console.log(d);
@@ -75,6 +123,10 @@ Homepage
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
+	  image.setAttribute("value",id);
+	  image.ondblclick = function() {
+	      console.log(this.getAttribute("value"));
+	  };
 	  image.setAttribute("src", i);
 	  name.innerHTML = n + "   #" +  id;
 	  mons.appendChild(name);

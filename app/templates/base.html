@@ -3,6 +3,10 @@
   <head>
     <title>{% block title %}{% endblock %}</title>
   </head>
+  <a href="/" class="nva-link">
+    <button>Home</button>
+  </a>
+  
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul class=flashes>

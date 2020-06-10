@@ -14,7 +14,7 @@ def create():
     create_table_users = "CREATE TABLE IF NOT EXISTS users(user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT);"
     insert_user = "INSERT OR IGNORE INTO users(user_id, username, password) VALUES( 1, \"admin\", \"stuy\");"
     create_table_favorites = "CREATE TABLE IF NOT EXISTS favorites(user_id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT);"
-    insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"2\");"
+    insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"1\");"
 
     c.execute(create_table_users)
     c.execute(insert_user)
@@ -72,6 +72,37 @@ def get_favs(user_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("SELECT list FROM favorites WHERE favorites.user_id == ?;", (user_id[0]))
-    for f in c.fetchall():
-        faves.append(int(f[0]))
+    l = ''.join((c.fetchall()[0])).split()
+    for f in l:
+        faves.append(int(f))
+    db.commit()
+    db.close()
     return faves
+
+def add_fave(user_id,pokemon_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    new = ''
+    prev = c.execute("SELECT list FROM favorites WHERE user_id == ?;", (user_id[0]))
+    l = ''.join((c.fetchall()[0])).split()
+    for f in l:
+        new = new + f + ' '
+    new = new + str(pokemon_id)
+    c.execute("UPDATE favorites SET list=? WHERE user_id == ?;", ((new,user_id[0][0])))
+    db.commit()
+    db.close()
+              
+def remove_fave(user_id,pokemon_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    new = ''
+    prev = c.execute("SELECT list FROM favorites WHERE user_id == ?;", (user_id[0]))
+    l = ''.join((c.fetchall()[0])).split()
+    for f in l:
+        if (f == str(pokemon_id)):
+            pass
+        else:
+            new = new + f + ' '
+    c.execute("UPDATE favorites SET list=? WHERE user_id == ?;", ((new,user_id[0][0])))
+    db.commit()
+    db.close()
