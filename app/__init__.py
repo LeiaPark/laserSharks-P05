@@ -17,13 +17,39 @@ from utl import api, db_functions #create_db
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+db_functions.create()
+if db_functions.check('gen1'):
+    print("ADDING GENERATION 1...")
+    db_functions.add_gen('gen1',api.get_gen1())
+if db_functions.check('gen2'):
+    print("ADDING GENERATION 2...")
+    db_functions.add_gen('gen2',api.get_gen2())
+if db_functions.check('gen3'):
+    print("ADDING GENERATION 3...")
+    db_functions.add_gen('gen3',api.get_gen3())
+if db_functions.check('gen4'):
+    print("ADDING GENERATION 4...")
+    db_functions.add_gen('gen4',api.get_gen4())
+if db_functions.check('gen5'):
+    print("ADDING GENERATION 5...")
+    db_functions.add_gen('gen5',api.get_gen5())
+if db_functions.check('gen6'):
+    print("ADDING GENERATION 6...")
+    db_functions.add_gen('gen6',api.get_gen6())
+if db_functions.check('gen7'):
+    print("ADDING GENERATION 7...")
+    db_functions.add_gen('gen7',api.get_gen7())
+
+mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
+print(len(mons))
+
 @app.route('/')
 def index():
     # load the template with the user's session info
     #if 'user' in session:
     #    return redirect(url_for('index'))
     #else:
-    pokemon = api.getPokemon()
+    pokemon = mons #db_functions.retrieve_gen1()
     return render_template('homepage.html', pokemon=pokemon)
 
 @app.route('/login')
@@ -58,8 +84,7 @@ def register():
 @app.route('/favorites')
 def favorites():
     if 'user' in session:
-        pokemon = api.getPokemon()
-        print(request.args)
+        pokemon = mons
         return render_template('favorites.html',
                                favorites=db_functions.get_favs(session['id']),
                                pokemon=pokemon)
@@ -71,7 +96,9 @@ def add():
     if 'user' in session:
         db_functions.add_fave(session['id'],request.args.get('pokemon_id'))
         flash('Added to Favorites')
-    return redirect(url_for('login'))
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():

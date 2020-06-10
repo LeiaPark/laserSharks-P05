@@ -31,10 +31,10 @@ Favorites
   var favorites = {{ favorites | safe }};
   console.log(favorites);
   var pokemons = {{ pokemon | safe }};
-  var t = 99;
+  var t = 807;
   var d = document.getElementById("dex");
 
-  for(var i = 0; i <= 99; i++) {
+  for(var i = 0; i <= t; i++) {
       if (favorites.includes(pokemons[i][1])) {
 	  var mons = document.createElement("DIV");
 	  var image = document.createElement("IMG");

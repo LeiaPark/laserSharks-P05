@@ -41,12 +41,12 @@ Homepage
 <script>
 
   var pokemon = {{ pokemon | safe }}
-  var t = 99;
-
+  var t = 807;
   var display = function(e) {
-      //var dex = document.createElement("UL");
       var d = document.getElementById("dex");
       var p = t - 19;
+      console.log(t);
+      console.log(p);
       while (t >= p) {
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
@@ -57,7 +57,6 @@ Homepage
 	  id = pokemon[t][1];
 	  i = pokemon[t][2];
 	  image.setAttribute("value",id);
-	  //image.setAttribute("type","image");
 	  image.setAttribute("src", i);
 	  /*
 	  image.setAttribute("onclick", "return false;");
@@ -91,49 +90,54 @@ Homepage
 	  mons.appendChild(par);
 	  mons.appendChild(button);
 	  t = t - 1;
-
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
 	      var pid = form.elements['pokemon_id'];
 	      form.addEventListener('submit', (event) => {
 		  //console.log(this.getAttribute("value"));
 		  pid.value = this.getAttribute("value");
-		  console.log(pid.value);
-		  //event.preventDefault();
 	      });
-	      //form.submit();
-	  }
-	  //button.addEventListener("click",add_fav());
+	      button.disabled = true;
+	  };  
 	  d.appendChild(mons);
 
       }
-      //d.append(dex);
-      console.log(d);
-  }
+  };
+   
 
   var addmons = function(e) {
       var d = document.getElementById("dex");
       var next = document.createElement("UL");
       var p = t - 19;
-      console.log(t);
-      console.log(p);
       while (t >= p) {
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
 	  var image = document.createElement("IMG");
+	  var button = document.createElement("BUTTON");
+	  var par = document.createElement("P");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
 	  image.setAttribute("value",id);
-	  image.ondblclick = function() {
-	      console.log(this.getAttribute("value"));
-	  };
 	  image.setAttribute("src", i);
 	  name.innerHTML = n + "   #" +  id;
+	  button.innerHTML = "Add to Favorites";
+	  button.setAttribute("value",id);
 	  mons.appendChild(name);
 	  mons.appendChild(image);
-	  d.appendChild(mons);
+	  mons.appendChild(par);
+	  mons.appendChild(button);
 	  t = t - 1;
+	  button.onclick = function() {
+	      var form = document.getElementById("f");
+	      var pid = form.elements['pokemon_id'];
+	      form.addEventListener('submit', (event) => {
+		  //console.log(this.getAttribute("value"));
+		  pid.value = this.getAttribute("value");
+	      });
+	      button.disabled = true;
+	  };  
+	  d.appendChild(mons);
       }
   }
 
