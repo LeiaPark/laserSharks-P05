@@ -100,6 +100,15 @@ def add():
     else:
         return redirect(url_for('login'))
 
+@app.route('/remove', methods=['GET', 'POST'])
+def remove():
+    if 'user' in session:
+        db_functions.remove_fave(session['id'],request.args.get('pokemon_id'))
+        flash('Removed from Favorites')
+        return redirect(url_for('favorites'))
+    else:
+        return redirect(url_for('login'))
+
 @app.route('/logout')
 def logout():
     session.pop('user', None)

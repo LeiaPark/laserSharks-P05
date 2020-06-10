@@ -13,7 +13,11 @@ Favorites
 
 <br><br>
 <center>
-  <div id="dex" class="dex"></div>
+  <form method="GET" action="/remove" id="f">
+    <input type="number" name="pokemon_id" style="display: none;"/>
+    <div id="dex" class="dex"></div>
+  </form>
+  
 </center>
 
 <style>
@@ -30,21 +34,35 @@ Favorites
 
   var favorites = {{ favorites | safe }};
   console.log(favorites);
-  var pokemons = {{ pokemon | safe }};
+  var pokemon = {{ pokemon | safe }};
   var t = 807;
   var d = document.getElementById("dex");
-
   for(var i = 0; i <= t; i++) {
-      if (favorites.includes(pokemons[i][1])) {
+      if (favorites.includes(pokemon[i][1])) {
 	  var mons = document.createElement("DIV");
 	  var image = document.createElement("IMG");
-	  n = pokemons[i][0];
-	  id = pokemons[i][1];
-	  im = pokemons[i][2];
+	  var par = document.createElement("P");
+	  var parr = document.createElement("P");
+	  var button = document.createElement("BUTTON");
+	  n = pokemon[i][0];
+	  id = pokemon[i][1];
+	  im = pokemon[i][2];
+	  image.setAttribute("value",id);
 	  image.setAttribute("src", im);
-	  //var name = document.createTextNode(n + "    #" + id);
-	  //mons.appendChild(name);
+	  par.innerHTML = n + "   #" +  id;
+	  button.innerHTML = "Remove from Favorites";
+	  button.setAttribute("value",id);
+	  mons.appendChild(par);
 	  mons.appendChild(image);
+	  mons.appendChild(parr);
+	  mons.appendChild(button);
+	  button.onclick = function() {
+	      var form = document.getElementById("f");
+	      var pid = form.elements['pokemon_id'];
+	      form.addEventListener('submit', (event) => {
+		  pid.value = this.getAttribute("value");
+	      });
+	  };  
 	  d.appendChild(mons);
       };
   };
