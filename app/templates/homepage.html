@@ -5,27 +5,27 @@ Homepage
 {% endblock %}
 
 {% block body %}
+<div class="containter bg-danger rounded">
+  <h1>Homepage</h1>
 
-<h1>Homepage</h1>
-
-<form method="GET" action="/login">
-  <button type="submit">Login</button>
-</form>
-<form method="GET" action="/favorites">
-  <button type="submit">Favorite Pokemon</button>
-</form>
-
-
-<br><br>
-<center>
-  <form method="GET" action="/add" id="f">
-    <input type="number" name="pokemon_id" style="display: none;"/>
-    <div id="dex" class="dex"></div>
-    <br>
+  <form method="GET" action="/login">
+    <button type="submit">Login</button>
   </form>
-  <button id="add">Load More Pokemon</button>
-</center>
+  <form method="GET" action="/favorites">
+    <button type="submit">Favorite Pokemon</button>
+  </form>
 
+
+  <br><br>
+  <center>
+    <form method="GET" action="/add" id="f">
+      <input type="number" name="pokemon_id" style="display: none;"/>
+      <div id="dex" class="dex"></div>
+      <br>
+    </form>
+    <button id="add">Load More Pokemon</button>
+  </center>
+</div>
 <style>
 
   .dex {
@@ -33,15 +33,15 @@ Homepage
       grid-template-columns: repeat(5, 1fr);
       grid-gap: 10px;
   }
-  
+
 </style>
 
 
 <script>
-  
+
   var pokemon = {{ pokemon | safe }}
   var t = 99;
-  
+
   var display = function(e) {
       //var dex = document.createElement("UL");
       var d = document.getElementById("dex");
@@ -102,9 +102,9 @@ Homepage
 	      });
 	      //form.submit();
 	  }
-	  //button.addEventListener("click",add_fav());	  
+	  //button.addEventListener("click",add_fav());
 	  d.appendChild(mons);
-	  
+
       }
       //d.append(dex);
       console.log(d);
@@ -140,7 +140,7 @@ Homepage
 
   var addbutton = document.getElementById("add");
   addbutton.addEventListener('click', addmons);
-  
+
 </script>
 
 {% endblock %}
