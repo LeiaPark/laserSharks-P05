@@ -1,10 +1,10 @@
 # PokeDex by Laser Sharks
 
 ### Team Roster
-- Alice Ni
-- Connor Oh
-- Leia Park
-- Hilary Zen
+- Alice Ni: Back end API/data
+- Connor Oh: Front end bootstrap
+- Leia Park: Project Manager
+- Hilary Zen: Python code
 
 ### Description
 The PokeDex is an ultra, super-deluxe, mega, revamped version of the classic handheld encyclopedia device of pocket monsters called by the same name.
