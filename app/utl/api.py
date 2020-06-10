@@ -78,3 +78,108 @@ def get_gen2():
         temp = []
         m = m - 1
     return d
+
+def get_gen3():
+    request = Request("https://pokeapi.co/api/v2/pokemon/?offset=251&limit=135", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    ''' d is an array of arrays. Each array will have pokemon information in this order:
+                 name, id, picture'''
+    temp = [] #holds the information while parsing through pokemons
+    m = 134
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        mon = urlopen(w).read()
+        mondata = [json.loads(mon)]
+        temp.append(data['results'][m]['name'])
+        temp.append(mondata[0]['id'])
+        temp.append(mondata[0]['sprites']['front_default'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_gen4():
+    request = Request("https://pokeapi.co/api/v2/pokemon/?offset=386&limit=107", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    ''' d is an array of arrays. Each array will have pokemon information in this order:
+                 name, id, picture'''
+    temp = [] #holds the information while parsing through pokemons
+    m = 106
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        mon = urlopen(w).read()
+        mondata = [json.loads(mon)]
+        temp.append(data['results'][m]['name'])
+        temp.append(mondata[0]['id'])
+        temp.append(mondata[0]['sprites']['front_default'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_gen5():
+    request = Request("https://pokeapi.co/api/v2/pokemon/?offset=494&limit=155", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    ''' d is an array of arrays. Each array will have pokemon information in this order:
+                 name, id, picture'''
+    temp = [] #holds the information while parsing through pokemons
+    m = 154
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        mon = urlopen(w).read()
+        mondata = [json.loads(mon)]
+        temp.append(data['results'][m]['name'])
+        temp.append(mondata[0]['id'])
+        temp.append(mondata[0]['sprites']['front_default'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_gen6():
+    request = Request("https://pokeapi.co/api/v2/pokemon/?offset=649&limit=72", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    ''' d is an array of arrays. Each array will have pokemon information in this order:
+                 name, id, picture'''
+    temp = [] #holds the information while parsing through pokemons
+    m = 71
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        mon = urlopen(w).read()
+        mondata = [json.loads(mon)]
+        temp.append(data['results'][m]['name'])
+        temp.append(mondata[0]['id'])
+        temp.append(mondata[0]['sprites']['front_default'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_gen7():
+    request = Request("https://pokeapi.co/api/v2/pokemon/?offset=721&limit=88", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    ''' d is an array of arrays. Each array will have pokemon information in this order:
+                 name, id, picture'''
+    temp = [] #holds the information while parsing through pokemons
+    m = 87
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        mon = urlopen(w).read()
+        mondata = [json.loads(mon)]
+        temp.append(data['results'][m]['name'])
+        temp.append(mondata[0]['id'])
+        temp.append(mondata[0]['sprites']['front_default'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d

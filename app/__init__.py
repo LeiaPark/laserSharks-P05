@@ -18,14 +18,29 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 db_functions.create()
-if db_functions.check1():
+if db_functions.check('gen1'):
     print("ADDING GENERATION 1...")
-    db_functions.add_gen1(api.get_gen1())
-if db_functions.check2():
+    db_functions.add_gen('gen1',api.get_gen1())
+if db_functions.check('gen2'):
     print("ADDING GENERATION 2...")
-    db_functions.add_gen2(api.get_gen2())
+    db_functions.add_gen('gen2',api.get_gen2())
+if db_functions.check('gen3'):
+    print("ADDING GENERATION 3...")
+    db_functions.add_gen('gen3',api.get_gen3())
+if db_functions.check('gen4'):
+    print("ADDING GENERATION 4...")
+    db_functions.add_gen('gen4',api.get_gen4())
+if db_functions.check('gen5'):
+    print("ADDING GENERATION 5...")
+    db_functions.add_gen('gen5',api.get_gen5())
+if db_functions.check('gen6'):
+    print("ADDING GENERATION 6...")
+    db_functions.add_gen('gen6',api.get_gen6())
+if db_functions.check('gen7'):
+    print("ADDING GENERATION 7...")
+    db_functions.add_gen('gen7',api.get_gen7())
 
-mons = db_functions.retrieve_gen2() + db_functions.retrieve_gen1()
+mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 print(len(mons))
 
 @app.route('/')
@@ -69,7 +84,7 @@ def register():
 @app.route('/favorites')
 def favorites():
     if 'user' in session:
-        pokemon = db_functions.retrieve_gen1()
+        pokemon = mons
         return render_template('favorites.html',
                                favorites=db_functions.get_favs(session['id']),
                                pokemon=pokemon)

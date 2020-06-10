@@ -18,6 +18,11 @@ def create():
     
     create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, image TEXT);"
     create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, image TEXT);"
+    create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, image TEXT);"
+    create_table_gen4 = "CREATE TABLE IF NOT EXISTS gen4(name TEXT, pokemon_id INTEGER, image TEXT);"
+    create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, image TEXT);"
+    create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, image TEXT);"
+    create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, image TEXT);"
     
     c.execute(create_table_users)
     c.execute(insert_user)
@@ -26,6 +31,11 @@ def create():
 
     c.execute(create_table_gen1)
     c.execute(create_table_gen2)
+    c.execute(create_table_gen3)
+    c.execute(create_table_gen4)
+    c.execute(create_table_gen5)
+    c.execute(create_table_gen6)
+    c.execute(create_table_gen7)
 
     db.commit()  # save changes
     db.close()  # close database
@@ -113,69 +123,37 @@ def remove_fave(user_id,pokemon_id):
     db.commit()
     db.close()
 
-def check1():
+def check(gen):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT * FROM gen1;")
+    c.execute("SELECT * FROM " + gen + ";")
     x = c.fetchall();
     if x:
         return False
     return True
 
-def add_gen1(gen1):
-    ''' gen1: array of arrays [ ['bulbasaur',1,'imagesrc'], ... ] '''
+def add_gen(num,gen):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    for pokemon in gen1:
-        c.execute("INSERT INTO gen1(name, pokemon_id, image) VALUES(?,?,?);", (pokemon[0],pokemon[1],pokemon[2]))
+    for pokemon in gen:
+        c.execute("INSERT INTO " + num + "(name, pokemon_id, image) VALUES(?,?,?);", (pokemon[0],pokemon[1],pokemon[2]))
     db.commit()
     db.close()
 
-def retrieve_gen1():
+def retrieve_gen(gen):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    gen1 = []
-    c.execute("SELECT * FROM gen1;")
+    genmons = []
+    c.execute("SELECT * FROM " + gen + ";")
     temp = []
     for pokemon in c.fetchall():
         temp.append(pokemon[0])
         temp.append(pokemon[1])
         temp.append(pokemon[2])
-        gen1.append(temp)
+        genmons.append(temp)
         temp = []
     db.commit()
     db.close()
-    return gen1
+    return genmons
 
-def check2():
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    c.execute("SELECT * FROM gen2;")
-    x = c.fetchall();
-    if x:
-        return False
-    return True
 
-def add_gen2(gen2):
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    for pokemon in gen2:
-        c.execute("INSERT INTO gen2(name, pokemon_id, image) VALUES(?,?,?);", (pokemon[0],pokemon[1],pokemon[2]))
-    db.commit()
-    db.close()
-
-def retrieve_gen2():
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    gen2 = []
-    c.execute("SELECT * FROM gen2;")
-    temp = []
-    for pokemon in c.fetchall():
-        temp.append(pokemon[0])
-        temp.append(pokemon[1])
-        temp.append(pokemon[2])
-        gen2.append(temp)
-        temp = []
-    db.commit()
-    db.close()
-    return gen2
