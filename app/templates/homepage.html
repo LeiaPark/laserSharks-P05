@@ -4,28 +4,40 @@
 Homepage
 {% endblock %}
 
-{% block body %}
-<div class="containter bg-danger rounded">
-  <div class="constainer bg-light rounded"
-    <h1>Homepage</h1>
-  </div>
+{%block navcontents%}
+<li class="nav-item">
   <form method="GET" action="/login">
     <button type="submit">Login</button>
   </form>
+</li>
+<li class="nav-item">
   <form method="GET" action="/favorites">
     <button type="submit">Favorite Pokemon</button>
   </form>
+</li>
+{% endblock %}
+{% block body %}
+<div class="view" style="background-image: url_for('images/pokemone1.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;"
+  <div class="mask rgba-black-light align-items-center">
+    <div class="container-fluid bg-light p-5 text-center"
+      <h1 class="display-1">Homepage</h1>
+    </div>
+    <div class="containter bg-danger rounded mx-5 p-2">
 
 
-  <br><br>
-  <center>
-    <form method="GET" action="/add" id="f">
-      <input type="number" name="pokemon_id" style="display: none;"/>
-      <div id="dex" class="dex"></div>
-      <br>
-    </form>
-    <button id="add">Load More Pokemon</button>
-  </center>
+
+
+      <br><br>
+      <center>
+        <form method="GET" action="/add" id="f">
+          <input type="number" name="pokemon_id" style="display: none;"/>
+          <div id="dex" class="dex"></div>
+          <br>
+        </form>
+        <button id="add">Load More Pokemon</button>
+      </center>
+    </div>
+  </div>
 </div>
 <style>
 
@@ -37,6 +49,9 @@ Homepage
 
 </style>
 
+<script>
+  new WOW().init();
+</script>
 
 <script>
 
@@ -98,12 +113,12 @@ Homepage
 		  pid.value = this.getAttribute("value");
 	      });
 	      button.disabled = true;
-	  };  
+	  };
 	  d.appendChild(mons);
 
       }
   };
-   
+
 
   var addmons = function(e) {
       var d = document.getElementById("dex");
@@ -136,7 +151,7 @@ Homepage
 		  pid.value = this.getAttribute("value");
 	      });
 	      button.disabled = true;
-	  };  
+	  };
 	  d.appendChild(mons);
       }
   }
