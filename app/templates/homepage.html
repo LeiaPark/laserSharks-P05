@@ -45,6 +45,8 @@ Homepage
       //var dex = document.createElement("UL");
       var d = document.getElementById("dex");
       var p = t - 19;
+      console.log(t);
+      console.log(p);
       while (t >= p) {
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
@@ -89,7 +91,6 @@ Homepage
 	  mons.appendChild(par);
 	  mons.appendChild(button);
 	  t = t - 1;
-
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
 	      var pid = form.elements['pokemon_id'];
@@ -99,22 +100,16 @@ Homepage
 	      });
 	      button.disabled = true;
 	  };  
-	      //form.submit();
-	  }
-	  //button.addEventListener("click",add_fav());
 	  d.appendChild(mons);
 
       }
-      //d.append(dex);
-      console.log(d);
-  }
+  };
+   
 
   var addmons = function(e) {
       var d = document.getElementById("dex");
       var next = document.createElement("UL");
       var p = t - 19;
-      console.log(t);
-      console.log(p);
       while (t >= p) {
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
