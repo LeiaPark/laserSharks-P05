@@ -41,12 +41,14 @@ Favorites
       if (favorites.includes(pokemon[i][1])) {
 	  var mons = document.createElement("DIV");
 	  var image = document.createElement("IMG");
+	  var types = document.createElement("P");
 	  var par = document.createElement("P");
-	  var parr = document.createElement("P");
 	  var button = document.createElement("BUTTON");
+	  var br = document.createElement("BR");
 	  n = pokemon[i][0];
 	  id = pokemon[i][1];
 	  im = pokemon[i][2];
+	  ty = pokemon[i][3];
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", im);
 	  par.innerHTML = n + "   #" +  id;
@@ -54,7 +56,20 @@ Favorites
 	  button.setAttribute("value",id);
 	  mons.appendChild(par);
 	  mons.appendChild(image);
-	  mons.appendChild(parr);
+	  mons.appendChild(br);
+	  
+	  len = ty.split(' ').length-1;
+	  k = 0;
+	  ts = ty.split(' ');
+	  while (k < len) {
+	      var badge = document.createElement("SPAN");
+	      badge.setAttribute("class","badge badge-pill badge-success");
+	      badge.innerHTML = ts[k];
+	      k++;
+	      mons.appendChild(badge);
+	  };
+	  
+	  mons.appendChild(br);
 	  mons.appendChild(button);
 	  button.onclick = function() {
 	      var form = document.getElementById("f");

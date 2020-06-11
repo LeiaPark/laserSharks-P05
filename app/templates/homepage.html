@@ -127,11 +127,13 @@ Homepage
 	  var mons = document.createElement("DIV");
 	  var name = document.createElement("P");
 	  var image = document.createElement("IMG");
+	  var types = document.createElement("P");
 	  var button = document.createElement("BUTTON");
-	  var par = document.createElement("P");
+	  var br = document.createElement("BR");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
+	  ty = pokemon[t][3];
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", i);
 	  name.innerHTML = n + "   #" +  id;
@@ -139,7 +141,20 @@ Homepage
 	  button.setAttribute("value",id);
 	  mons.appendChild(name);
 	  mons.appendChild(image);
-	  mons.appendChild(par);
+	  mons.appendChild(br);
+	  
+	  len = ty.split(' ').length-1;
+	  k = 0;
+	  ts = ty.split(' ');
+	  while (k < len) {
+	      var badge = document.createElement("SPAN");
+	      badge.setAttribute("class","badge badge-pill badge-success");
+	      badge.innerHTML = ts[k];
+	      k++;
+	      mons.appendChild(badge);
+	  };
+	  
+	  mons.appendChild(br);
 	  mons.appendChild(button);
 	  t = t - 1;
 	  button.onclick = function() {
