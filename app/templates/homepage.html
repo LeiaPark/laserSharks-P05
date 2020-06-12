@@ -3,7 +3,9 @@
 {% block title %}
 Homepage
 {% endblock %}
-
+{% block stylesheet %}
+<link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/homepage.css') }}">
+{% endblock %}
 {%block navcontents%}
 <li class="nav-item">
   <form method="GET" action="/login">
@@ -17,7 +19,8 @@ Homepage
 </li>
 {% endblock %}
 {% block body %}
-<div class="view" style="background-image: url_for('images/pokemone1.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;"
+
+<div class="view" style="background:transparent url({{ url_for('static',filename='img/pokemon1.jpg') }}) no-repeat center center /cover"
   <div class="mask rgba-black-light align-items-center">
     <div class="container-fluid bg-light p-5 text-center"
       <h1 class="display-1">Homepage</h1>
@@ -102,6 +105,7 @@ Homepage
 	  types.innerHTML = ty;
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
+    button.setAttribute("class", "btn btn-outline-success")
 	  mons.appendChild(name);
 	  mons.appendChild(image);
 	  mons.appendChild(br);
