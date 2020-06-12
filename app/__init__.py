@@ -16,7 +16,6 @@ from utl import api, db_functions #create_db
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-user = "null"
 db_functions.create()
 if db_functions.check('gen1'):
     print("ADDING GENERATION 1...")
@@ -69,6 +68,9 @@ def index():
     #    return redirect(url_for('index'))
     #else:
     pokemon = mons #db_functions.retrieve_gen1()
+    user="null"
+    if 'user' in session:
+        user=session['user']
     return render_template('homepage.html', pokemon=pokemon, user=user)
 
 @app.route('/login')
