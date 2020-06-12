@@ -7,11 +7,19 @@ Homepage
   <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/homepage.css') }}">
 {% endblock %}
 {%block navcontents%}
-<li class="nav-item m-2">
-  <form method="GET" action="/login">
-    <button class="btn btn-outline-dark" type="submit">Login</button>
-  </form>
-</li>
+{% if user == 'null' %}
+  <li class="nav-item m-2">
+    <form method="GET" action="/login">
+      <button class="btn btn-outline-dark" type="submit">Login</button>
+    </form>
+  </li>
+{% else %}
+  <li class="nav-item m-2">
+    <form method="GET" action="/logout">
+      <button class="btn btn-outline-dark" type="submit">Log Out</button>
+    </form>
+  </li>
+{% endif %}
 <li class="nav-item m-2">
   <form method="GET" action="/favorites">
     <button class="btn btn-outline-dark" type="submit">Favorite Pokemon</button>
@@ -21,14 +29,18 @@ Homepage
 {% block body %}
 <div class="containter bg-danger rounded mx-5 p-2">
   <br><br>
-  <center>
-    <form method="GET" action="/add" id="f">
-      <input type="number" name="pokemon_id" style="display: none;"/>
-      <div id="dex" class="dex"></div>
-      <br>
-    </form>
-    <button class=" " id="add">Load More Pokemon</button>
-  </center>
+  <div class="container-fluid m-2 p-2"
+    <div class="container">
+      <form method="GET" action="/add" id="f">
+        <input type="number" name="pokemon_id" style="display: none;"/>
+        <div id="dex" class="dex"></div>
+        <br>
+      </form>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary" id="add">Load More Pokemon</button>
+    </div>
+  </div>
 </div>
 <style>
 

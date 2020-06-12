@@ -16,7 +16,6 @@ from utl import api, db_functions #create_db
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-
 db_functions.create()
 if db_functions.check('gen1'):
     print("ADDING GENERATION 1...")
@@ -70,16 +69,21 @@ def index():
     #    return redirect(url_for('index'))
     #else:
     pokemon = mons #db_functions.retrieve_gen1()
-    return render_template('homepage.html', pokemon=pokemon)
+    user="null"
+    if 'user' in session:
+        user=session['user']
+    return render_template('homepage.html', pokemon=pokemon, user=user)
 
 @app.route('/login')
 def login():
     if 'user' in session:
+        user=session['user']
         return redirect(url_for('index'))
     elif request.args:
         if db_functions.checkfor_credentials(request.args.get('username'), request.args.get('password')):
             session['user'] = request.args.get('username')
             session['id'] = db_functions.get_user_id(request.args.get('username'))
+            user=session['user']
             return redirect(url_for('index'))
         else:
             flash('Invalid Credentials')
@@ -90,6 +94,7 @@ def login():
 @app.route('/register')
 def register():
     if 'user' in session:
+        user=session['user']
         return redirect(url_for('index'))
     elif request.args:
         if db_functions.checkfor_username(request.args.get('username')):
