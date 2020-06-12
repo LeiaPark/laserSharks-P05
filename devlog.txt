@@ -19,3 +19,8 @@ aliceN -- 2020-06-10 19:27
 - Changed backend design to database based, greatly reduces lag. 
   However, this means starting the app will take about a minute. No working around that
 - Will work on search bar
+
+aliceN -- 2020-06-12 16:57
+- Search for pokemon by name and ID functionality implemented
+- Will add more details to the results page
+- Search by name is currently case sensitive, will fix that
