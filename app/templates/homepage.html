@@ -7,11 +7,19 @@ Homepage
   <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/homepage.css') }}">
 {% endblock %}
 {%block navcontents%}
-<li class="nav-item m-2">
-  <form method="GET" action="/login">
-    <button class="btn btn-outline-dark" type="submit">Login</button>
-  </form>
-</li>
+{% if user == 'null' %}
+  <li class="nav-item m-2">
+    <form method="GET" action="/login">
+      <button class="btn btn-outline-dark" type="submit">Login</button>
+    </form>
+  </li>
+{% else %}
+  <li class="nav-item m-2">
+    <form method="GET" action="/logout">
+      <button class="btn btn-outline-dark" type="submit">Log Out</button>
+    </form>
+  </li>
+{% endif %}
 <li class="nav-item m-2">
   <form method="GET" action="/favorites">
     <button class="btn btn-outline-dark" type="submit">Favorite Pokemon</button>
