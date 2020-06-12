@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block body %}
+<div class="text-center">
+  <h1>Searches for: {{ search }}</h1>
+  <br>
+  <h2 id="name">df</h2>
+  <br>
+  <img id="image" width='200' height='200'></img>
+  <br>
+	
+</div>
+
+
+<script>
+  var pokemon = {{ result | safe }}
+  console.log(pokemon);
+  var n = document.getElementById('name');
+  n.innerHTML = pokemon[0];
+  var i = document.getElementById('image');
+  i.setAttribute('src',pokemon[2]);
+
+</script>
+
+
+
+{% endblock %}

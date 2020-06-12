@@ -135,11 +135,16 @@ def hasNumbers(inputString):
 def search():
     s = request.args.get('keyword')
     if get_monname(s):
-        flash('yee')
+        return render_template('search.html', search=s, result=get_monname(s))
     elif hasNumbers(s):
         if get_monid(int(s)):
-            flash('yeee')
-    return redirect(url_for('index'))
+            return render_template('search.html', search=s, result=get_monid(int(s)))
+        else:
+            flash('ID not found')
+            return redirect(url_for('index'))
+    else:
+        flash('Pokemon not found')
+        return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
