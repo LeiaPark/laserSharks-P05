@@ -41,6 +41,7 @@ if db_functions.check('gen7'):
     db_functions.add_gen('gen7',api.get_gen7())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
+#mons = db_functions.retrieve_gen('gen1')
 print(len(mons))
 
 @app.route('/')
@@ -97,6 +98,15 @@ def add():
         db_functions.add_fave(session['id'],request.args.get('pokemon_id'))
         flash('Added to Favorites')
         return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/remove', methods=['GET', 'POST'])
+def remove():
+    if 'user' in session:
+        db_functions.remove_fave(session['id'],request.args.get('pokemon_id'))
+        flash('Removed from Favorites')
+        return redirect(url_for('favorites'))
     else:
         return redirect(url_for('login'))
 

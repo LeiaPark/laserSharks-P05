@@ -13,3 +13,9 @@ aliceN -- 2020-06-08 14:07
 
 leiaP -- 2020-06-10 13:38
 - Grouped imports as instructed
+
+aliceN -- 2020-06-10 19:27
+- Both add and remove pokemon from favorites functional
+- Changed backend design to database based, greatly reduces lag. 
+  However, this means starting the app will take about a minute. No working around that
+- Will work on search bar

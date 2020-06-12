@@ -14,36 +14,13 @@ headers = {
     'Connection': 'keep-alive'
 }
 
-# POKE API :: the first most basic call !!!
-def getPokemon():
-    # gets the num pokemon
-    request = Request("https://pokeapi.co/api/v2/pokemon/?limit=100", headers=headers) 
-    response = urlopen(request).read()
-    data = json.loads(response)
-    m = 99
-    d = []
-    ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name, id, picture'''
-    temp = [] #holds the information while parsing through pokemons
-    while m >= 0:
-        w = Request(data['results'][m]['url'], headers=headers)
-        mon = urlopen(w).read()
-        mondata = [json.loads(mon)]
-        temp.append(data['results'][m]['name'])
-        temp.append(mondata[0]['id'])
-        temp.append(mondata[0]['sprites']['front_default'])
-        d.append(temp)
-        temp = []
-        m = m - 1
-    return d
-
 def get_gen1():
     request = Request("https://pokeapi.co/api/v2/pokemon/?limit=151", headers=headers) 
     response = urlopen(request).read()
     data = json.loads(response)
     d = []
     ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name, id, picture'''
+                 name(str), id(int), picture(str), type(array)'''
     temp = [] #holds the information while parsing through pokemons
     m = 150
     while m >= 0:
@@ -53,6 +30,12 @@ def get_gen1():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+           # typ.append(mondata[0]['types'][x]['type']['name'])
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -63,8 +46,6 @@ def get_gen2():
     response = urlopen(request).read()
     data = json.loads(response)
     d = []
-    ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name, id, picture'''
     temp = [] #holds the information while parsing through pokemons
     m = 99
     while m >= 0:
@@ -74,6 +55,11 @@ def get_gen2():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -95,6 +81,11 @@ def get_gen3():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -116,6 +107,11 @@ def get_gen4():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -137,6 +133,11 @@ def get_gen5():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -158,6 +159,11 @@ def get_gen6():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
@@ -179,6 +185,11 @@ def get_gen7():
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
         temp.append(mondata[0]['sprites']['front_default'])
+        l = len(mondata[0]['types'])
+        typ = ''
+        for x in range(l):
+            typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
+        temp.append(typ)
         d.append(temp)
         temp = []
         m = m - 1
