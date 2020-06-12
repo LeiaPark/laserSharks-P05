@@ -58,6 +58,7 @@ Homepage
 	  var types = document.createElement("P");
 	  var button = document.createElement("BUTTON");
 	  var br = document.createElement("BR");
+	  var ps = document.createElement("P");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1];
 	  i = pokemon[t][2];
@@ -93,7 +94,7 @@ Homepage
 	  types.innerHTML = ty;
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
-    button.setAttribute("class", "btn btn-outline-success")
+	  button.setAttribute("class", "btn btn-outline-success")
 	  mons.appendChild(name);
 	  mons.appendChild(image);
 	  mons.appendChild(br);
@@ -109,7 +110,7 @@ Homepage
 	      mons.appendChild(badge);
 	  };
 
-	  mons.appendChild(br);
+	  mons.appendChild(ps);
 	  mons.appendChild(button);
 	  t = t - 1;
 	  button.onclick = function() {
