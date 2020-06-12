@@ -41,8 +41,26 @@ if db_functions.check('gen7'):
     db_functions.add_gen('gen7',api.get_gen7())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
-#mons = db_functions.retrieve_gen('gen1')
 print(len(mons))
+
+def get_monname(name):
+    for pokemon in mons:
+        for n in pokemon:
+            if n == name:
+                #print(pokemon)
+                return pokemon
+    #print('Pokemon not found')
+    return False
+
+def get_monid(pokemon_id):
+    for pokemon in mons:
+        for n in pokemon:
+            if n == pokemon_id:
+                #print(pokemon)
+                return pokemon
+    #print('Pokemon not found')
+    return False
+
 
 @app.route('/')
 def index():
@@ -109,6 +127,19 @@ def remove():
         return redirect(url_for('favorites'))
     else:
         return redirect(url_for('login'))
+
+def hasNumbers(inputString):
+    return any(char.isdigit() for char in inputString)
+
+@app.route('/search')
+def search():
+    s = request.args.get('keyword')
+    if get_monname(s):
+        flash('yee')
+    elif hasNumbers(s):
+        if get_monid(int(s)):
+            flash('yeee')
+    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():

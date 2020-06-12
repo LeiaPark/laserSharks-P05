@@ -15,6 +15,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
        <ul class="navbar-nav mr-auto">
          {% block navcontents %} {% endblock %}
+
+	 <!-- here lies the search bar -->
+	 
+	 <li>
+	   <form class="form-inline" action="/search" method="GET">
+             <input class="form-control mr-sm-2" type="search" placeholder="enter name or ID" aria-label="Search" name="keyword">
+             <button style="justify-self; center;" type="submit">Search</button>
+           </form>
+	 </li>
+
+	 
        </ul>
      </div>
     </nav>
