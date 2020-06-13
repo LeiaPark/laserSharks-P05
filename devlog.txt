@@ -24,3 +24,9 @@ aliceN -- 2020-06-12 16:57
 - Search for pokemon by name and ID functionality implemented
 - Will add more details to the results page
 - Search by name is currently case sensitive, will fix that
+
+aliceN -- 2020-06-13 00:00
+- Added spider charts that display the base stats of pokemon
+- A few things need to be fixed, like the labels and make it look prettier with colors
+- badges now come with colors according to the pokemon types
+- Will start working on the who's that pokemon game
