@@ -138,7 +138,10 @@ Homepage
 	  };
 */
 	  //mons.setAttribute("style", "display: grid;");
-	  name.innerHTML = n + "   #" +  id;
+	  cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  if (id < 10) { name.innerHTML = cn + "   " + "#00" + id; }
+	  else if (id >= 10 && id < 100) { name.innerHTML = cn + "   " + "#0" + id; }
+	  else { name.innerHTML = cn + "   " + "#" + id; }
 	  types.innerHTML = ty;
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
@@ -225,7 +228,10 @@ Homepage
 	  ty = pokemon[t][3];
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", i);
-	  name.innerHTML = n + "   #" +  id;
+	  cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  if (id < 10) { name.innerHTML = cn + "   " + "#00" + id; }
+	  else if (id >= 10 && id < 100) { name.innerHTML = cn + "   " + "#0" + id; }
+	  else { name.innerHTML = cn + "   " + "#" + id; }
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
 	  button.setAttribute("class", "btn btn-outline-success")
