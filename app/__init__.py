@@ -75,7 +75,9 @@ types = ['normal','fighting','flying','poison','ground','rock','bug','ghost','st
 @app.route('/')
 def index():
     # add the if request args stuff djfadjfh
+    print(request.args)
     if request.args:
+        print(request.args)
         s = request.args.get('sort')
         if s in gens:
             pokemon = db_functions.retrieve_gen(request.args.get('sort'))

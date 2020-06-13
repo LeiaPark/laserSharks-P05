@@ -28,54 +28,62 @@ Homepage
 {% endblock %}
 {% block body %}
 <center>
-<div class="containter bg-danger rounded mx-5 p-5">
-  <div class="container-fluid m-2 p-2"
-       <div class="container">
-
-	 <!-- Here lies the sort form -->
-	 <form method="GET" action="/" id="sorts">
-	   <button type="submit">Sort</button>
-	   <select name="sort" id="sort" form="sorts">
-	     <option value="default">Sort by...</option>
-	     <option value="gen1">Gen 1 (Kanto)</option>
-	     <option value="gen2">Gen 2 (Johto)</option>
-	     <option value="gen3">Gen 3 (Hoenn)</option>
-	     <option value="gen4">Gen 4 (Sinnoh)</option>
-	     <option value="gen5">Gen 5 (Unova)</option>
-	     <option value="gen6">Gen 6 (Kalos)</option>
-	     <option value="gen7">Gen 7 (Alola)</option>
-	     <option value="normal">Normal</option>
-	     <option value="fighting">Fighting</option>
-	     <option value="flying">Flying</option>
-	     <option value="poison">Poison</option>
-	     <option value="ground">Ground</option>
-	     <option value="rock">Rock</option>
-	     <option value="bug">Bug</option>
-	     <option value="ghost">Ghost</option>
-	     <option value="steel">Steel</option>
-	     <option value="fire">Fire</option>
-	     <option value="water">Water</option>
-	     <option value="grass">Grass</option>
-	     <option value="electric">Electric</option>
-	     <option value="psychic">Psychic</option>
-	     <option value="ice">Ice</option>
-	     <option value="dragon">Dragon</option>
-	     <option value="fairy">Fairy</option>
-	     <option value="dark">Dark</option>
-	   </select>
-	 </form>
-	 <br><br>
-	 
-	 <form method="GET" action="/add" id="f">
-           <input type="number" name="pokemon_id" style="display: none;"/>
-           <div id="dex" class="dex"></div>
-           <br>
-	 </form>
-       </div>
-       <div class="d-flex justify-content-center">
-	 <button class="btn btn-primary" id="add">Load More Pokemon</button>
-       </div>
-</div>
+  <div class="containter bg-danger rounded mx-5 p-5">
+    <div class="container-fluid m-2 p-2 text-center">
+      <div class="row">
+        <div class="col-lg align-self-center"
+      	   <!-- Here lies the sort form -->
+      	  <form method="GET" action="/" id="sorts">
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <button class="btn btn-secondary" type="submit">Sort</button>
+              </div>
+              <div class="col-auto">
+                <select class="form-control" name="sort" id="sort" form="sorts">
+                  <option hidden>Sort by...</option>
+                  <option value="default">Show All</option>
+                  <option value="gen1">Gen 1 (Kanto)</option>
+                  <option value="gen2">Gen 2 (Johto)</option>
+                  <option value="gen3">Gen 3 (Hoenn)</option>
+                  <option value="gen4">Gen 4 (Sinnoh)</option>
+                  <option value="gen5">Gen 5 (Unova)</option>
+                  <option value="gen6">Gen 6 (Kalos)</option>
+                  <option value="gen7">Gen 7 (Alola)</option>
+                  <option value="normal">Normal</option>
+                  <option value="fighting">Fighting</option>
+                  <option value="flying">Flying</option>
+                  <option value="poison">Poison</option>
+                  <option value="ground">Ground</option>
+                  <option value="rock">Rock</option>
+                  <option value="bug">Bug</option>
+                  <option value="ghost">Ghost</option>
+                  <option value="steel">Steel</option>
+                  <option value="fire">Fire</option>
+                  <option value="water">Water</option>
+                  <option value="grass">Grass</option>
+                  <option value="electric">Electric</option>
+                  <option value="psychic">Psychic</option>
+                  <option value="ice">Ice</option>
+                  <option value="dragon">Dragon</option>
+                  <option value="fairy">Fairy</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <div class="container m-5">
+        <form method="GET" action="/add" id="f">
+          <input type="number" name="pokemon_id" style="display: none;"/>
+          <div id="dex" class="dex"></div>
+        </form>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" id="add">Load More Pokemon</button>
+      </div>
+  </div>
 </center>
 
 <style>
@@ -180,7 +188,7 @@ Homepage
 	      badge.innerHTML = types[i];
 	      mons.appendChild(badge);
 	  };
-	  
+
 	  /*len = ty.split(' ').length-1;
 	  k = 0;
 	  ts = ty.split(' ');
@@ -269,7 +277,7 @@ Homepage
 	      badge.innerHTML = types[i];
 	      mons.appendChild(badge);
 	  };
-	  
+
 	  /*len = ty.split(' ').length-1;
 	  k = 0;
 	  ts = ty.split(' ');
