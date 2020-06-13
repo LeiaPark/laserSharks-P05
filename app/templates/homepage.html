@@ -8,19 +8,19 @@ Homepage
 {% endblock %}
 {%block navcontents%}
 {% if user == 'null' %}
-  <li class="nav-item m-2">
+  <li class="nav-item mx-2">
     <form method="GET" action="/login">
       <button class="btn btn-outline-dark" type="submit">Login</button>
     </form>
   </li>
 {% else %}
-  <li class="nav-item m-2">
+  <li class="nav-item mx-2">
     <form method="GET" action="/logout">
       <button class="btn btn-outline-dark" type="submit">Log Out</button>
     </form>
   </li>
 {% endif %}
-<li class="nav-item m-2">
+<li class="nav-item mx-2">
   <form method="GET" action="/favorites">
     <button class="btn btn-outline-dark" type="submit">Favorite Pokemon</button>
   </form>
@@ -28,8 +28,7 @@ Homepage
 {% endblock %}
 {% block body %}
 
-<div class="containter bg-danger rounded mx-5 p-2">
-  <br><br>
+<div class="containter bg-danger rounded mx-5 p-5">
   <div class="container-fluid m-2 p-2"
        <div class="container">
 
