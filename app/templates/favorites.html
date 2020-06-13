@@ -3,32 +3,27 @@
 {% block title %}
 Favorites
 {% endblock %}
-
-{% block body %}
-<h1>Favorites</h1>
-
-<form method="GET" action="/logout" >
-  <input type="submit" value="Logout">
-</form>
-
-<br><br>
-<center>
-  <form method="GET" action="/remove" id="f">
-    <input type="number" name="pokemon_id" style="display: none;"/>
-    <div id="dex" class="dex"></div>
+{% block stylesheet %}
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/favorite.css') }}">
+{% endblock %}
+{%block navcontents%}
+<li class="nav-item mx-2">
+  <form method="GET" action="/logout">
+    <button class="btn btn-outline-dark" type="submit">Log Out</button>
   </form>
-  
-</center>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/">
+    <button class="btn btn-outline-dark" type="submit">Home</button>
+  </form>
+</li>
+{% endblock %}
+{% block body %}
+  <form method="GET" action="/remove" id="f">
+    <div class="container-flex bg-danger m-3 p-5 pokedex" id="cont"></div>
+    <input type="number" name="pokemon_id" style="display: none;"/>
+  </form>
 
-<style>
-
-  .dex {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 10px;
-  }
-  
-</style>
 
 <script>
 
@@ -36,56 +31,80 @@ Favorites
   console.log(favorites);
   var pokemon = {{ pokemon | safe }};
   var t = 807;
-  var d = document.getElementById("dex");
+  var container = document.getElementById("cont");
+  var perrow = 0;
+  var row;
   for(var i = 0; i <= t; i++) {
-      if (favorites.includes(pokemon[i][1])) {
-	  var mons = document.createElement("DIV");
-	  var image = document.createElement("IMG");
-	  var types = document.createElement("P");
-	  var par = document.createElement("P");
-	  var button = document.createElement("BUTTON");
-	  var br = document.createElement("BR");
-	  n = pokemon[i][0];
-	  id = pokemon[i][1];
-	  im = pokemon[i][2];
-	  ty = pokemon[i][3];
-	  image.setAttribute("value",id);
-	  image.setAttribute("src", im);
-	  par.innerHTML = n + "   #" +  id;
-	  button.innerHTML = "Remove from Favorites";
-	  button.setAttribute("value",id);
-	  mons.appendChild(par);
-	  mons.appendChild(image);
-	  mons.appendChild(br);
-	  
-	  len = ty.split(' ').length-1;
-	  k = 0;
-	  ts = ty.split(' ');
-	  while (k < len) {
-	      var badge = document.createElement("SPAN");
-	      badge.setAttribute("class","badge badge-pill badge-success");
-	      badge.innerHTML = ts[k];
-	      k++;
-	      mons.appendChild(badge);
-	  };
-	  
-	  mons.appendChild(br);
-	  mons.appendChild(button);
-	  button.onclick = function() {
-	      var form = document.getElementById("f");
-	      var pid = form.elements['pokemon_id'];
-	      form.addEventListener('submit', (event) => {
-		  pid.value = this.getAttribute("value");
-	      });
-	  };  
-	  d.appendChild(mons);
-      };
+    if (favorites.includes(pokemon[i][1])) {
+      if(perrow == 0){
+        row =  document.createElement("DIV");
+        row.setAttribute("class", "row");
+      }
+      var col = document.createElement("DIV");
+      var card = document.createElement("DIV");
+      var cardhead = document.createElement("H5");
+      var cardbody = document.createElement("DIV");
+  	  var image = document.createElement("IMG");
+  	  var types = document.createElement("P");
+  	  var par = document.createElement("P");
+  	  var button = document.createElement("BUTTON");
+  	  var br = document.createElement("BR");
+      var badges = document.createElement("DIV");
+  	  n = pokemon[i][0];
+  	  id = pokemon[i][1];
+  	  im = pokemon[i][2];
+  	  ty = pokemon[i][3];
+  	  image.setAttribute("value",id);
+  	  image.setAttribute("src", im);
+      image.setAttribute("class", "card-img-top");
+      image.setAttribute("height", "auto");
+      image.setAttribute("width", "100px");
+  	  button.innerHTML = "Remove from Favorites";
+  	  button.setAttribute("value",id);
+      button.setAttribute("class", "btn btn-outline-danger");
+      col.setAttribute("class", "col my-2");
+      card.setAttribute("class", "card");
+      cardbody.setAttribute("class", "card-body text-center");
+      cardhead.setAttribute("class", "card-title text-center");
+      badges.setAttribute("class", "container m-2")
+      cardhead.innerHTML = n + "   #" +  id;
+  	  card.appendChild(image);
+      cardbody.appendChild(cardhead);
+  	  len = ty.split(' ').length-1;
+  	  k = 0;
+  	  ts = ty.split(' ');
+  	  while (k < len) {
+  	      var badge = document.createElement("SPAN");
+  	      badge.setAttribute("class","badge badge-pill badge-success");
+  	      badge.innerHTML = ts[k];
+  	      k++;
+  	      badges.appendChild(badge);
+  	  };
+      cardbody.appendChild(badges);
+  	  cardbody.appendChild(button);
+      card.appendChild(cardbody);
+      col.appendChild(card);
+  	  button.onclick = function() {
+  	      var form = document.getElementById("f");
+  	      var pid = form.elements['pokemon_id'];
+  	      form.addEventListener('submit', (event) => {
+  		  pid.value = this.getAttribute("value");
+  	      });
+  	  };
+      row.appendChild(col);
+      perrow++
+      if(perrow>=4){
+        container.appendChild(row);
+        perrow = 0;
+      }
+    };
+
   };
-  
-  
+
+
 
 </script>
 
-  
-  
+
+
 {% endblock %}
