@@ -27,7 +27,7 @@ Homepage
 </li>
 {% endblock %}
 {% block body %}
-
+<center>
 <div class="containter bg-danger rounded mx-5 p-5">
   <div class="container-fluid m-2 p-2"
        <div class="container">
@@ -76,7 +76,7 @@ Homepage
 	 <button class="btn btn-primary" id="add">Load More Pokemon</button>
        </div>
 </div>
-
+</center>
 
 <style>
 
@@ -147,7 +147,38 @@ Homepage
 	  mons.appendChild(image);
 	  mons.appendChild(br);
 
-	  len = ty.split(' ').length-1;
+	  var get_type = function(type) {
+	      if (type === "normal") return "badge-normal";
+	      else if (type === "fighting") return "badge-fighting";
+	      else if (type === "flying") return "badge-flying";
+	      else if (type === "poison") return "badge-poison";
+	      else if (type === "ground") return "badge-ground";
+	      else if (type === "rock") return "badge-rock";
+	      else if (type === "bug") return "badge-bug";
+	      else if (type === "ghost") return "badge-ghost";
+	      else if (type === "steel") return "badge-steel";
+	      else if (type === "fire") return "badge-fire";
+	      else if (type === "water") return "badge-water";
+	      else if (type === "grass") return "badge-grass";
+	      else if (type === "electric") return "badge-electric";
+	      else if (type === "psychic") return "badge-psychic";
+	      else if (type === "ice") return "badge-ice";
+	      else if (type === "dragon") return "badge-dragon";
+	      else if (type === "fairy") return "badge-fairy";
+	      else if (type === "dark") return "badge-dark";
+	  }
+
+	  var m = pokemon[t][3];
+	  types = m.split(' ');
+	  l = m.split(' ').length-1;
+	  for (i = 0; i < l; i++) {
+	      var badge = document.createElement("SPAN");
+	      badge.setAttribute("class","badge badge-pill " + get_type(types[i]));
+	      badge.innerHTML = types[i];
+	      mons.appendChild(badge);
+	  };
+	  
+	  /*len = ty.split(' ').length-1;
 	  k = 0;
 	  ts = ty.split(' ');
 	  while (k < len) {
@@ -156,7 +187,7 @@ Homepage
 	      badge.innerHTML = ts[k];
 	      k++;
 	      mons.appendChild(badge);
-	  };
+	  };*/
 
 	  mons.appendChild(ps);
 	  mons.appendChild(button);
@@ -187,6 +218,7 @@ Homepage
 	  var types = document.createElement("P");
 	  var button = document.createElement("BUTTON");
 	  var br = document.createElement("BR");
+	  var ps = document.createElement("P");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
@@ -201,7 +233,38 @@ Homepage
 	  mons.appendChild(image);
 	  mons.appendChild(br);
 
-	  len = ty.split(' ').length-1;
+	  var get_type = function(type) {
+	      if (type === "normal") return "badge-normal";
+	      else if (type === "fighting") return "badge-fighting";
+	      else if (type === "flying") return "badge-flying";
+	      else if (type === "poison") return "badge-poison";
+	      else if (type === "ground") return "badge-ground";
+	      else if (type === "rock") return "badge-rock";
+	      else if (type === "bug") return "badge-bug";
+	      else if (type === "ghost") return "badge-ghost";
+	      else if (type === "steel") return "badge-steel";
+	      else if (type === "fire") return "badge-fire";
+	      else if (type === "water") return "badge-water";
+	      else if (type === "grass") return "badge-grass";
+	      else if (type === "electric") return "badge-electric";
+	      else if (type === "psychic") return "badge-psychic";
+	      else if (type === "ice") return "badge-ice";
+	      else if (type === "dragon") return "badge-dragon";
+	      else if (type === "fairy") return "badge-fairy";
+	      else if (type === "dark") return "badge-dark";
+	  }
+
+	  var m = pokemon[t][3];
+	  types = m.split(' ');
+	  l = m.split(' ').length-1;
+	  for (i = 0; i < l; i++) {
+	      var badge = document.createElement("SPAN");
+	      badge.setAttribute("class","badge badge-pill " + get_type(types[i]));
+	      badge.innerHTML = types[i];
+	      mons.appendChild(badge);
+	  };
+	  
+	  /*len = ty.split(' ').length-1;
 	  k = 0;
 	  ts = ty.split(' ');
 	  while (k < len) {
@@ -210,9 +273,9 @@ Homepage
 	      badge.innerHTML = ts[k];
 	      k++;
 	      mons.appendChild(badge);
-	  };
+	  };*/
 
-	  mons.appendChild(br);
+	  mons.appendChild(ps);
 	  mons.appendChild(button);
 	  t = t - 1;
 	  button.onclick = function() {
