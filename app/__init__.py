@@ -43,6 +43,7 @@ mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + d
 print(len(mons))
 
 def get_monname(name):
+    name = name.lower().strip()
     for pokemon in mons:
         for n in pokemon:
             if n == name:
