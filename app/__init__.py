@@ -47,28 +47,41 @@ def get_monname(name):
     for pokemon in mons:
         for n in pokemon:
             if n == name:
-                #print(pokemon)
                 return pokemon
-    #print('Pokemon not found')
     return False
 
 def get_monid(pokemon_id):
     for pokemon in mons:
         for n in pokemon:
             if n == pokemon_id:
-                #print(pokemon)
                 return pokemon
-    #print('Pokemon not found')
     return False
 
+def get_montypes(types):
+    ans = []
+    for pokemon in mons:
+        t = pokemon[3].split()
+        for x in t:
+            if x == types:
+                ans.append(pokemon)
+    return ans
+
+gens = ['gen1','gen2','gen3','gen4','gen5','gen6','gen7']
+types = ['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','fairy','dark']
 
 @app.route('/')
 def index():
-    # load the template with the user's session info
-    #if 'user' in session:
-    #    return redirect(url_for('index'))
-    #else:
-    pokemon = mons #db_functions.retrieve_gen1()
+    # add the if request args stuff djfadjfh
+    if request.args:
+        s = request.args.get('sort')
+        if s in gens:
+            pokemon = db_functions.retrieve_gen(request.args.get('sort'))
+        elif s in types:
+            pokemon = get_montypes(s)
+        elif s == 'default':
+            pokemon = mons
+    else:
+        pokemon = mons
     user="null"
     if 'user' in session:
         user=session['user']

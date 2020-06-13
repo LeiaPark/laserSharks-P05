@@ -100,7 +100,8 @@ Search
   var pokemon = {{ result | safe }}
   var mons = document.getElementById("dex");
   var n = document.getElementById('name');
-  n.innerHTML = pokemon[0];
+  cn = pokemon[0].charAt(0).toUpperCase() + pokemon[0].slice(1);
+  n.innerHTML = cn;
   
   var d = document.getElementById('id');
   console.log(pokemon[1] < 10)
