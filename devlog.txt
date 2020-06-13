@@ -8,7 +8,7 @@ hilaryZ -- 2020-06-08 01:09
 
 aliceN -- 2020-06-08 14:07
 - Homepage now displays first 20 pokemon
-- Modified basic API call 
+- Modified basic API call
 - Will work on the formatting
 
 leiaP -- 2020-06-10 13:38
@@ -16,14 +16,23 @@ leiaP -- 2020-06-10 13:38
 
 aliceN -- 2020-06-10 19:27
 - Both add and remove pokemon from favorites functional
-- Changed backend design to database based, greatly reduces lag. 
+- Changed backend design to database based, greatly reduces lag.
   However, this means starting the app will take about a minute. No working around that
 - Will work on search bar
+
+connorO -- 2020-06-10 23:59
+-started work on the bootstrap spefically for the main homepage
+-trying to get background images to work
 
 aliceN -- 2020-06-12 16:57
 - Search for pokemon by name and ID functionality implemented
 - Will add more details to the results page
 - Search by name is currently case sensitive, will fix that
+
+connorO -- 2020-06-12 23:59
+-work almost done on bootstrapping Homepage
+-got background images to working
+-made navbar
 
 aliceN -- 2020-06-13 00:00
 - Added spider charts that display the base stats of pokemon

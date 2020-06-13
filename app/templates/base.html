@@ -31,7 +31,7 @@
         <div style="position: absolute; top: 0; right: 0;">
 
           <!-- Then put toasts within -->
-          <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+          <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
             <div class="toast-header">
               <img src="{{ url_for('static',filename='img/pokedex.png') }}" class="rounded mr-2" alt="...">
               <strong class="mr-auto">Pokedex</strong>
@@ -50,8 +50,8 @@
     {% block body %}{% endblock %}
     <!-- Footer -->
     <footer class="footer fixed-bottom">
-      <div class="container-flex bg-primary">
-        <div class="row justify-content-md-center">
+      <div class="container-flex bg-primary foot">
+        <div class="row justify-content-center pt-2">
           <div class="col-md-auto"></div>
           <div class="col-md-auto">
             <a class="text-white" href="https://github.com/LeiaPark/laserSharks-P05">LaserSharks</a>

@@ -118,8 +118,11 @@ def register():
         if db_functions.checkfor_username(request.args.get('username')):
             flash('Account with that username already exists')
             return redirect(url_for('register'))
+        elif request.args.get('password1') != request.args.get('password2'):
+            flash('Passwords Don\'t Match')
+            return redirect(url_for('register'))
         else:
-            db_functions.create_user(request.args.get('username'), request.args.get('password'))
+            db_functions.create_user(request.args.get('username'), request.args.get('password1'))
             flash('Account Created')
             return redirect(url_for('login'))
     return render_template('register.html')
