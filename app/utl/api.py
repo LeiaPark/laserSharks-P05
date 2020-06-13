@@ -20,7 +20,7 @@ def get_gen1():
     data = json.loads(response)
     d = []
     ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name(str), id(int), picture(str), type(array)'''
+                 name(str), id(int), picture(str), type(array), weight(int), height(int)'''
     temp = [] #holds the information while parsing through pokemons
     m = 150
     while m >= 0:
@@ -36,6 +36,13 @@ def get_gen1():
            # typ.append(mondata[0]['types'][x]['type']['name'])
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -60,6 +67,13 @@ def get_gen2():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -86,6 +100,13 @@ def get_gen3():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -112,6 +133,13 @@ def get_gen4():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -138,6 +166,13 @@ def get_gen5():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -164,6 +199,13 @@ def get_gen6():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1
@@ -190,6 +232,13 @@ def get_gen7():
         for x in range(l):
             typ = typ + mondata[0]['types'][x]['type']['name'] + ' '
         temp.append(typ)
+        temp.append(mondata[0]['weight'])
+        temp.append(mondata[0]['height'])
+        # the stats in order: hp, attack, defense, special-attack, special-defense, speed
+        stats = ''
+        for x in range(6):
+            stats = stats + str(mondata[0]['stats'][x]['base_stat']) + ' '
+        temp.append(stats)
         d.append(temp)
         temp = []
         m = m - 1

@@ -40,6 +40,7 @@ if db_functions.check('gen7'):
     db_functions.add_gen('gen7',api.get_gen7())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
+#mons = db_functions.retrieve_gen('gen1')
 print(len(mons))
 
 def get_monname(name):
@@ -52,9 +53,11 @@ def get_monname(name):
 
 def get_monid(pokemon_id):
     for pokemon in mons:
-        for n in pokemon:
-            if n == pokemon_id:
-                return pokemon
+        if pokemon[1] == pokemon_id:
+            return pokemon
+        #for n in pokemon:
+        #    if n == pokemon_id:
+        #        return pokemon
     return False
 
 def get_montypes(types):

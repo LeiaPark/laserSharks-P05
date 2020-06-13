@@ -16,13 +16,13 @@ def create():
     create_table_favorites = "CREATE TABLE IF NOT EXISTS favorites(user_id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT);"
     insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"1\");"
     
-    create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen4 = "CREATE TABLE IF NOT EXISTS gen4(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
-    create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT);"
+    create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen4 = "CREATE TABLE IF NOT EXISTS gen4(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     
     c.execute(create_table_users)
     c.execute(insert_user)
@@ -136,7 +136,7 @@ def add_gen(num,gen):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     for pokemon in gen:
-        c.execute("INSERT INTO " + num + "(name, pokemon_id, image, types) VALUES(?,?,?,?);", (pokemon[0],pokemon[1],pokemon[2],pokemon[3]))
+        c.execute("INSERT INTO " + num + "(name, pokemon_id, image, types, weight, height, stats) VALUES(?,?,?,?,?,?,?);", (pokemon[0],pokemon[1],pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6]))
     db.commit()
     db.close()
 
@@ -151,6 +151,9 @@ def retrieve_gen(gen):
         temp.append(pokemon[1])
         temp.append(pokemon[2])
         temp.append(pokemon[3])
+        temp.append(pokemon[4])
+        temp.append(pokemon[5])
+        temp.append(pokemon[6])
         genmons.append(temp)
         temp = []
     db.commit()

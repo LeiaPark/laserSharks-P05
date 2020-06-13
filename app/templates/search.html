@@ -5,20 +5,29 @@ Search
 {% endblock %}
 
 {% block body %}
-<div class="text-center" id="dex">
-  <h1>Searches for: {{ search }}</h1>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<div style="width: 100%;">
+  <div class="text-center" id="dex" style="width: 50%;  float: left;">
+    <!-- <h1>Searches for: {{ search }}</h1> -->
+    <br>
+    <h2 id="name"></h2>
+    <br>
+    <h2 id="id"></h2>
+    <img id="image" width='200' height='200'></img>
+    <br>
+    <h5 id="list"></h5>
+  </div>
   <br>
-  <h2 id="name"></h2>
-  <br>
-  <h3 id="id"></h3>
-  
-  <img id="image" width='200' height='200'></img>
-  <br>
-  
+  <div id="stats" style="margin-left: 10%;">
+    <br><br><br>
+    <h5 id="weight"></h5>
+    <h5 id="height"></h5>
+  </div>
 </div>
-
+<br><br>
 <style>
-
+  
   .badge-normal {
       background-color: #838683;
       color: white;
@@ -109,8 +118,6 @@ Search
   else if (pokemon[1] > 10 && pokemon[1] < 100) { d.innerHTML = "#0" + pokemon[1]; }
   else { d.innerHTML = "#" + pokemon[1]; }
   
-
-  
   var i = document.getElementById('image');
   i.setAttribute('src',pokemon[2]);
 
@@ -146,8 +153,115 @@ Search
       h.appendChild(badge)
       mons.appendChild(h);
   };
+
+  var stats = pokemon[6].split(' ');
+  stats.pop()
+  for (i = 0; i < 6; i++) {
+      stats[i] = parseInt(stats[i]);
+  };
+  var lis = document.getElementById("list");
+  lis.innerHTML = "HP: " + stats[0] + "\t   Attack: " + stats[1] + "   Defense: " + stats[2] + "   Special Attack: " + stats[3] + "   Special Defense: " + stats[4] + "   Speed: " + stats[5]
+  // FIX THIS ^^^ AJFDKAJ
   
+  var w = document.getElementById("weight");
+  w.innerHTML = "Weight: " + pokemon[4] + " hectograms";
+  var h = document.getElementById("height");
+  h.innerHTML = "Height: " + pokemon[5] + " decimeters";
+
+  let data = [];
+  let features = ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense','Speed']
+  //generate the data
+  var point = {}
+  point[features[0]] = stats[0];
+  point[features[1]] = stats[1];
+  point[features[2]] = stats[2];
+  point[features[3]] = stats[3];
+  point[features[4]] = stats[4];
+  point[features[5]] = stats[5];
+  data.push(point);
+  console.log(data);
+  let svg = d3.select("body").append("svg")
+      .attr("width", 400)
+      .attr("height", 400);
   
+  let radialScale = d3.scaleLinear()
+      .domain([0,255])
+      .range([0,180]);
+  let ticks = [50,100,150,200,250];
+  
+  ticks.forEach(t =>
+		svg.append("circle")
+		.attr("cx", 200)
+		.attr("cy", 200)
+		.attr("fill", "none")
+		.attr("stroke", "gray")
+		.attr("r", radialScale(t))
+	       );
+  ticks.forEach(t =>
+		svg.append("text")
+		.attr("x", 210)
+		.attr("y", 200 - radialScale(t))
+		.text(t.toString())
+	       );
+  function angleToCoordinate(angle, value){
+      let x = Math.cos(angle) * radialScale(value);
+      let y = Math.sin(angle) * radialScale(value);
+      return {"x": 200 + x, "y": 200 - y};
+  }
+
+  for (var i = 0; i < features.length; i++) {
+      let ft_name = features[i];
+      let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+      let line_coordinate = angleToCoordinate(angle, 255);  // fix position of labels
+      let label_coordinate = angleToCoordinate(angle, 260);
+
+      //draw axis line
+      svg.append("line")
+	  .attr("x1", 200)
+	  .attr("y1", 200)
+	  .attr("x2", line_coordinate.x)
+	  .attr("y2", line_coordinate.y)
+	  .attr("stroke","black");
+
+      //draw axis label
+      svg.append("text")
+	  .attr("x", label_coordinate.x)
+	  .attr("y", label_coordinate.y)
+	  .text(ft_name);
+  }
+
+  let line = d3.line()
+      .x(d => d.x)
+      .y(d => d.y);
+  // add some more colors
+  let colors = ["darkorange", "gray", "navy", "steelblue", "pink", "orangered"];
+
+  function getPathCoordinates(data_point){
+      let coordinates = [];
+      for (var i = 0; i < features.length; i++){
+          let ft_name = features[i];
+          let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+          coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
+      }
+      return coordinates;
+  }
+
+  for (var i = 0; i < data.length; i ++){
+      let d = data[i];
+      let color = colors[Math.floor(Math.random() * 6)];
+      let coordinates = getPathCoordinates(d);
+
+      //draw the path element
+      svg.append("path")
+	  .datum(coordinates)
+	  .attr("d",line)
+	  .attr("stroke-width", 3)
+	  .attr("stroke", color)
+	  .attr("fill", color)
+	  .attr("stroke-opacity", 1)
+	  .attr("opacity", 0.5);
+  }
+
 
 </script>
 
