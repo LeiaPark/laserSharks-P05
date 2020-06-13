@@ -25,6 +25,10 @@ header,
   }
 }
 
+body {
+  margin-top: 70px;
+}
+
 .top-nav-collapse {
   background-color: #3f51b5 !important;
 }
