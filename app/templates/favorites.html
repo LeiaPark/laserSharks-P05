@@ -67,15 +67,40 @@ Favorites
       cardbody.setAttribute("class", "card-body text-center");
       cardhead.setAttribute("class", "card-title text-center");
       badges.setAttribute("class", "container m-2")
-      cardhead.innerHTML = n + "   #" +  id;
+      cn = n.charAt(0).toUpperCase() + n.slice(1);
+  	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
+  	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
+  	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
   	  card.appendChild(image);
       cardbody.appendChild(cardhead);
   	  len = ty.split(' ').length-1;
   	  k = 0;
   	  ts = ty.split(' ');
+
+      var get_type = function(type) {
+  	      if (type === "normal") return "badge-normal";
+  	      else if (type === "fighting") return "badge-fighting";
+  	      else if (type === "flying") return "badge-flying";
+  	      else if (type === "poison") return "badge-poison";
+  	      else if (type === "ground") return "badge-ground";
+  	      else if (type === "rock") return "badge-rock";
+  	      else if (type === "bug") return "badge-bug";
+  	      else if (type === "ghost") return "badge-ghost";
+  	      else if (type === "steel") return "badge-steel";
+  	      else if (type === "fire") return "badge-fire";
+  	      else if (type === "water") return "badge-water";
+  	      else if (type === "grass") return "badge-grass";
+  	      else if (type === "electric") return "badge-electric";
+  	      else if (type === "psychic") return "badge-psychic";
+  	      else if (type === "ice") return "badge-ice";
+  	      else if (type === "dragon") return "badge-dragon";
+  	      else if (type === "fairy") return "badge-fairy";
+  	      else if (type === "dark") return "badge-dark";
+  	  }
+
   	  while (k < len) {
   	      var badge = document.createElement("SPAN");
-  	      badge.setAttribute("class","badge badge-pill badge-success");
+  	      badge.setAttribute("class","badge badge-pill " + get_type(ts[k]));
   	      badge.innerHTML = ts[k];
   	      k++;
   	      badges.appendChild(badge);
@@ -93,7 +118,7 @@ Favorites
   	  };
       row.appendChild(col);
       perrow++
-      if(perrow>=4){
+      if(perrow>=5){
         container.appendChild(row);
         perrow = 0;
       }
