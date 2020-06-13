@@ -19,16 +19,11 @@ Favorites
 </li>
 {% endblock %}
 {% block body %}
-<div class="container-flex m-3 p-3 pokedex rounded mr-2">
+<div class="container-flex m-3 p-3 pokedex">
   <form method="GET" action="/remove" id="f">
     <div class="container-flex" id="cont"></div>
     <input type="number" name="pokemon_id" style="display: none;"/>
   </form>
-  {% if favorites|length > 5%}
-    <div class="d-flex justify-content-center">
-      <button class="btn btn-primary" id="add">Load More Pokemon</button>
-    </div>
-  {% endif %}
 </div>
 
 
@@ -42,11 +37,7 @@ Favorites
   var container = document.getElementById("cont");
   var row = document.createElement("DIV");
   row.setAttribute("class", "row row-cols-5");
-  var perpage = favorites.length;
-  if (favorites.length > 5){
-    perpage = 5;
-  }
-  for(var i = 0; i <= t && perpage>0; i++) {
+  for(var i = 0; i <= t; i++) {
       if (favorites.includes(pokemon[i][1])) {
     var col = document.createElement("DIV");
     var card = document.createElement("DIV");
@@ -122,11 +113,9 @@ Favorites
 	      });
 	  };
     row.appendChild(col);
-    perpage = perpage - 1;
     };
-
+    container.appendChild(row);
   };
-  container.appendChild(row);
 
 
 
