@@ -15,7 +15,7 @@ def create():
     insert_user = "INSERT OR IGNORE INTO users(user_id, username, password) VALUES( 1, \"admin\", \"stuy\");"
     create_table_favorites = "CREATE TABLE IF NOT EXISTS favorites(user_id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT);"
     insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"1\");"
-    
+
     create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
@@ -23,7 +23,7 @@ def create():
     create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    
+
     c.execute(create_table_users)
     c.execute(insert_user)
     c.execute(create_table_favorites)
@@ -107,7 +107,7 @@ def add_fave(user_id,pokemon_id):
     c.execute("UPDATE favorites SET list=? WHERE user_id == ?;", ((new,user_id[0][0])))
     db.commit()
     db.close()
-              
+
 def remove_fave(user_id,pokemon_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -159,6 +159,3 @@ def retrieve_gen(gen):
     db.commit()
     db.close()
     return genmons
-
-
-

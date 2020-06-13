@@ -19,10 +19,18 @@ Favorites
 </li>
 {% endblock %}
 {% block body %}
+<div class="container-flex m-3 p-3 pokedex rounded mr-2">
   <form method="GET" action="/remove" id="f">
-    <div class="container-flex bg-danger m-3 p-5 pokedex" id="cont"></div>
+    <div class="container-flex" id="cont"></div>
     <input type="number" name="pokemon_id" style="display: none;"/>
   </form>
+  {% if favorites|length > 5%}
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary" id="add">Load More Pokemon</button>
+    </div>
+  {% endif %}
+</div>
+
 
 
 <script>
@@ -32,99 +40,93 @@ Favorites
   var pokemon = {{ pokemon | safe }};
   var t = 807;
   var container = document.getElementById("cont");
-  var perrow = 0;
-  var row;
-  for(var i = 0; i <= t; i++) {
-    if (favorites.includes(pokemon[i][1])) {
-      if(perrow == 0){
-        row =  document.createElement("DIV");
-        row.setAttribute("class", "row");
-      }
-      var col = document.createElement("DIV");
-      var card = document.createElement("DIV");
-      var cardhead = document.createElement("H5");
-      var cardbody = document.createElement("DIV");
-  	  var image = document.createElement("IMG");
-  	  var types = document.createElement("P");
-  	  var par = document.createElement("P");
-  	  var button = document.createElement("BUTTON");
-  	  var br = document.createElement("BR");
-      var badges = document.createElement("DIV");
-  	  n = pokemon[i][0];
-  	  id = pokemon[i][1];
-  	  im = pokemon[i][2];
-  	  ty = pokemon[i][3];
-  	  image.setAttribute("value",id);
-  	  image.setAttribute("src", im);
-      image.setAttribute("class", "card-img-top");
-      image.setAttribute("height", "auto");
-      image.setAttribute("width", "100px");
-  	  button.innerHTML = "Remove from Favorites";
-  	  button.setAttribute("value",id);
-      button.setAttribute("class", "btn btn-outline-danger");
-      col.setAttribute("class", "col my-2");
-      card.setAttribute("class", "card");
-      cardbody.setAttribute("class", "card-body text-center");
-      cardhead.setAttribute("class", "card-title text-center");
-      badges.setAttribute("class", "container m-2")
-      cn = n.charAt(0).toUpperCase() + n.slice(1);
-  	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
-  	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
-  	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
-  	  card.appendChild(image);
-      cardbody.appendChild(cardhead);
-  	  len = ty.split(' ').length-1;
-  	  k = 0;
-  	  ts = ty.split(' ');
+  var row = document.createElement("DIV");
+  row.setAttribute("class", "row row-cols-5");
+  var perpage = favorites.length;
+  if (favorites.length > 5){
+    perpage = 5;
+  }
+  for(var i = 0; i <= t && perpage>0; i++) {
+      if (favorites.includes(pokemon[i][1])) {
+    var col = document.createElement("DIV");
+    var card = document.createElement("DIV");
+    var cardhead = document.createElement("H5");
+    var cardbody = document.createElement("DIV");
+	  var image = document.createElement("IMG");
+	  var types = document.createElement("P");
+	  var par = document.createElement("P");
+	  var button = document.createElement("BUTTON");
+	  var br = document.createElement("BR");
+    var badges = document.createElement("DIV");
+	  n = pokemon[i][0];
+	  id = pokemon[i][1];
+	  im = pokemon[i][2];
+	  ty = pokemon[i][3];
+	  image.setAttribute("value",id);
+	  image.setAttribute("src", im);
+    image.setAttribute("class", "card-img-top");
+    image.setAttribute("height", "auto");
+    image.setAttribute("width", "auto");
+	  button.innerHTML = "Remove from Favorites";
+	  button.setAttribute("value",id);
+    button.setAttribute("class", "btn btn-outline-danger");
+    col.setAttribute("class", "col my-2");
+    card.setAttribute("class", "card");
+    cardbody.setAttribute("class", "card-body text-center");
+    cardhead.setAttribute("class", "card-title text-center");
+    badges.setAttribute("class", "container m-2")
+    cardhead.innerHTML = n + "   #" +  id;
+	  card.appendChild(image);
+    cardbody.appendChild(cardhead);
 
-      var get_type = function(type) {
-  	      if (type === "normal") return "badge-normal";
-  	      else if (type === "fighting") return "badge-fighting";
-  	      else if (type === "flying") return "badge-flying";
-  	      else if (type === "poison") return "badge-poison";
-  	      else if (type === "ground") return "badge-ground";
-  	      else if (type === "rock") return "badge-rock";
-  	      else if (type === "bug") return "badge-bug";
-  	      else if (type === "ghost") return "badge-ghost";
-  	      else if (type === "steel") return "badge-steel";
-  	      else if (type === "fire") return "badge-fire";
-  	      else if (type === "water") return "badge-water";
-  	      else if (type === "grass") return "badge-grass";
-  	      else if (type === "electric") return "badge-electric";
-  	      else if (type === "psychic") return "badge-psychic";
-  	      else if (type === "ice") return "badge-ice";
-  	      else if (type === "dragon") return "badge-dragon";
-  	      else if (type === "fairy") return "badge-fairy";
-  	      else if (type === "dark") return "badge-dark";
-  	  }
+    var get_type = function(type) {
+	      if (type === "normal") return "badge-normal";
+	      else if (type === "fighting") return "badge-fighting";
+	      else if (type === "flying") return "badge-flying";
+	      else if (type === "poison") return "badge-poison";
+	      else if (type === "ground") return "badge-ground";
+	      else if (type === "rock") return "badge-rock";
+	      else if (type === "bug") return "badge-bug";
+	      else if (type === "ghost") return "badge-ghost";
+	      else if (type === "steel") return "badge-steel";
+	      else if (type === "fire") return "badge-fire";
+	      else if (type === "water") return "badge-water";
+	      else if (type === "grass") return "badge-grass";
+	      else if (type === "electric") return "badge-electric";
+	      else if (type === "psychic") return "badge-psychic";
+	      else if (type === "ice") return "badge-ice";
+	      else if (type === "dragon") return "badge-dragon";
+	      else if (type === "fairy") return "badge-fairy";
+	      else if (type === "dark") return "badge-dark";
+	  }
 
-  	  while (k < len) {
-  	      var badge = document.createElement("SPAN");
-  	      badge.setAttribute("class","badge badge-pill " + get_type(ts[k]));
-  	      badge.innerHTML = ts[k];
-  	      k++;
-  	      badges.appendChild(badge);
-  	  };
-      cardbody.appendChild(badges);
-  	  cardbody.appendChild(button);
-      card.appendChild(cardbody);
-      col.appendChild(card);
-  	  button.onclick = function() {
-  	      var form = document.getElementById("f");
-  	      var pid = form.elements['pokemon_id'];
-  	      form.addEventListener('submit', (event) => {
-  		  pid.value = this.getAttribute("value");
-  	      });
-  	  };
-      row.appendChild(col);
-      perrow++
-      if(perrow>=5){
-        container.appendChild(row);
-        perrow = 0;
-      }
+	  len = ty.split(' ').length-1;
+	  k = 0;
+	  ts = ty.split(' ');
+	  while (k < len) {
+	      var badge = document.createElement("SPAN");
+	      badge.setAttribute("class","badge badge-pill " + get_type(ts[k]));
+	      badge.innerHTML = ts[k];
+	      k++;
+	      badges.appendChild(badge);
+	  };
+    cardbody.appendChild(badges);
+	  cardbody.appendChild(button);
+    card.appendChild(cardbody);
+    col.appendChild(card);
+	  button.onclick = function() {
+	      var form = document.getElementById("f");
+	      var pid = form.elements['pokemon_id'];
+	      form.addEventListener('submit', (event) => {
+		  pid.value = this.getAttribute("value");
+	      });
+	  };
+    row.appendChild(col);
+    perpage = perpage - 1;
     };
 
   };
+  container.appendChild(row);
 
 
 
