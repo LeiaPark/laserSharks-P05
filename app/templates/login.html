@@ -4,18 +4,51 @@
 Login
 {% endblock %}
 
-{% block body %}
-<h1>Login</h1>
-<form method="GET" action="/login">
-  <label>Name</label>
-  <input type="text" name="username"> <br> <br>
-  <label>Password</label>
-  <input type="text" name="password"><br> <br>
-  <input type="submit">
-</form>
+{% block stylesheet %}
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/login.css') }}">
+{% endblock %}
 
-<form method="GET" action="/register">
-  <button type="submit">Register</button>
-</form>
+{% block body %}
+<div class="container-flex m-3 p-4">
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="card card-less">
+        <div class="card-header">
+          <h3>Welcome to the Pokedex</h3>
+        </div>
+        <div class="card-body">
+          <p class="lead">
+            Here lies the only pokedex you will ever need. Created from the minds of the team Laser Sharks, we bring to you an advanced pokedex with pokemon from generations 1-7. Each pokemon will have their own stats and will be displayed. By signing up you can add pokemon to your favorites. So what you waiting for. Sign up to get this vast dataset of little cute, yet tough, monsters.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Login</h1>
+        </div>
+        <div class="card-body">
+          <form method="GET" action="/login">
+            <div class="form-group">
+              <label for="nameinput">Name</label>
+              <input class="form-control" type="text" name="username" id="nameinput" placeholder="ex: John Doe">
+            </div>
+            <div class="form-group">
+              <label for="pass">Password</label>
+              <input class="form-control" id="pass" type="password" name="password"><br> <br>
+            </div>
+              <input class="btn btn-success" type="submit">
+          </form>
+          <hr>
+          <form method="GET" action="/register">
+            <button class="btn btn-secondary" type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}

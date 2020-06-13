@@ -1,0 +1,19 @@
+body {
+    background-image: url(../img/bglogin.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card {
+  width:500px;
+  background-color: rgba(245, 245, 245, 0.4) !important;
+}
+
+.card-less {
+  width:500px;
+  background-color: rgba(245, 245, 245, 0.7) !important;
+}
