@@ -30,7 +30,7 @@ body {
 }
 .badge-bug {
     background-color: #bcf75a ;
-    color: white;
+    color: black;
 }
 .badge-ghost {
     background-color: #6814fc;
@@ -54,7 +54,7 @@ body {
 }
 .badge-electric {
     background-color: #fff813;
-    color: white;
+    color: black;
 }
 .badge-psychic {
     background-color: #a83674;
