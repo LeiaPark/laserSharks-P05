@@ -3,11 +3,13 @@
 {% block title %}
 Search
 {% endblock %}
-
+{% block stylesheet %}
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/search.css') }}">
+{% endblock %}
 {% block body %}
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<div style="width: 100%;">
+<div style="width: 100%;" id="bigdiv">
   <div class="text-center" id="dex" style="width: 50%;  float: left;">
     <!-- <h1>Searches for: {{ search }}</h1> -->
     <br>
@@ -16,7 +18,39 @@ Search
     <h2 id="id"></h2>
     <img id="image" width='200' height='200'></img>
     <br>
-    <h5 id="list"></h5>
+    <div id="badge"></div><br>
+
+    <!-- This be the table -->
+    
+    <table class="text:center" style="width:40%;" id="tab" align="center">
+      <tr>
+	<th>HP</th>
+	<td id="hp"></td>
+      </tr>
+      <tr>
+	<th>Attack</th>
+	<td id="attack"></td>
+      </tr>
+      <tr>
+	<th>Defense</th>
+	<td id="defense"></td>
+      </tr>
+      <tr>
+	<th>Special Attack</th>
+	<td id="specialattack"></td>
+      </tr>
+      <tr>
+	<th>Special Defense</th>
+	<td id="specialdefense"></td>
+      </tr>
+      <tr>
+	<th>Speed</th>
+	<td id="speed"></td>
+      </tr>
+    </table>
+    
+
+    
   </div>
   <br>
   <div id="stats" style="margin-left: 10%;">
@@ -26,88 +60,11 @@ Search
   </div>
 </div>
 <br><br>
-<style>
-  
-  .badge-normal {
-      background-color: #838683;
-      color: white;
-  }
-  .badge-fighting {
-      background-color: #be4a33;
-      color: white;
-  }
-  .badge-flying {
-      background-color: #89c0e8;
-      color: white;
-  }
-  .badge-poison {
-      background-color: #c43cf3 ;
-      color: white;
-  }
-  .badge-ground {
-      background-color: #6d3803 ;
-      color: white;
-  }
-  .badge-rock {
-      background-color: #c4b287 ;
-      color: white;
-  }
-  .badge-bug {
-      background-color: #bcf75a ;
-      color: white;
-  }
-  .badge-ghost {
-      background-color: #6814fc;
-      color: white;
-  }
-  .badge-steel {
-      background-color: #6b7cb4;
-      color: white;
-  }
-  .badge-fire {
-      background-color: #ffab03;
-      color: white;
-  }
-  .badge-water {
-      background-color: #4c95ff;
-      color: white;
-  }
-  .badge-grass {
-      background-color: #0dd000;
-      color: white;
-  }
-  .badge-electric {
-      background-color: #fff813;
-      color: white;
-  }
-  .badge-psychic {
-      background-color: #a83674;
-      color: white;
-  }
-  .badge-ice {
-      background-color: #9ff5f7;
-      color: white;
-  }
-  .badge-dragon {
-      background-color: #0726d6;
-      color: white;
-  }
-  .badge-fairy {
-      background-color: #ffc2d0;
-      color: white;
-  }
-  .badge-dark {
-      background-color: #01030e;
-      color: white;
-  }
-  
-			    
-</style>
 
 <script>
   
   var pokemon = {{ result | safe }}
-  var mons = document.getElementById("dex");
+  var mons = document.getElementById("badge");
   var n = document.getElementById('name');
   cn = pokemon[0].charAt(0).toUpperCase() + pokemon[0].slice(1);
   n.innerHTML = cn;
@@ -159,9 +116,19 @@ Search
   for (i = 0; i < 6; i++) {
       stats[i] = parseInt(stats[i]);
   };
-  var lis = document.getElementById("list");
-  lis.innerHTML = "HP: " + stats[0] + "\t   Attack: " + stats[1] + "   Defense: " + stats[2] + "   Special Attack: " + stats[3] + "   Special Defense: " + stats[4] + "   Speed: " + stats[5]
-  // FIX THIS ^^^ AJFDKAJ
+  
+  var hp = document.getElementById("hp");
+  hp.innerHTML = stats[0];
+  var attack = document.getElementById("attack");
+  attack.innerHTML = stats[1];
+  var defense = document.getElementById("defense");
+  defense.innerHTML = stats[2];
+  var specialattack = document.getElementById("specialattack");
+  specialattack.innerHTML = stats[3];
+  var specialdefense = document.getElementById("specialdefense");
+  specialdefense.innerHTML = stats[4];
+  var hp = document.getElementById("speed");
+  speed.innerHTML = stats[5];
   
   var w = document.getElementById("weight");
   w.innerHTML = "Weight: " + pokemon[4] + " hectograms";
@@ -179,9 +146,8 @@ Search
   point[features[4]] = stats[4];
   point[features[5]] = stats[5];
   data.push(point);
-  console.log(data);
   let svg = d3.select("body").append("svg")
-      .attr("width", 400)
+      .attr("width", 600)
       .attr("height", 400);
   
   let radialScale = d3.scaleLinear()
@@ -234,7 +200,7 @@ Search
       .x(d => d.x)
       .y(d => d.y);
   // add some more colors
-  let colors = ["darkorange", "gray", "navy", "steelblue", "pink", "orangered"];
+  let colors = ["darkorange", "navy", "steelblue", "aqua", "aquamarine", "blueviolet", "chartreuse", "chocolate", "coral", "cornflowerblue", "crimson", "darkgoldenrod", "darkmagenta", "darkorchid", "hotpink", "salmon"];
 
   function getPathCoordinates(data_point){
       let coordinates = [];
@@ -248,7 +214,7 @@ Search
 
   for (var i = 0; i < data.length; i ++){
       let d = data[i];
-      let color = colors[Math.floor(Math.random() * 6)];
+      let color = colors[Math.floor(Math.random() * colors.length)];
       let coordinates = getPathCoordinates(d);
 
       //draw the path element
@@ -259,9 +225,13 @@ Search
 	  .attr("stroke", color)
 	  .attr("fill", color)
 	  .attr("stroke-opacity", 1)
-	  .attr("opacity", 0.5);
+	  .attr("opacity", 0.7);
   }
 
+  var br = document.createElement("BR");
+  var sss = document.getElementById("bigdiv");
+  sss.appendChild(br);
+  sss.appendChild(br);
 
 </script>
 

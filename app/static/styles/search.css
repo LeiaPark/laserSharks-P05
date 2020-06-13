@@ -1,7 +1,12 @@
-body {
-    background-image: url(../img/pokemon1.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 10px;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
 }
 
 .badge-normal {
