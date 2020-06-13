@@ -3,6 +3,7 @@ body,
 header,
 .view {
   height: 100%;
+  position: relative;
 }
 
 @media (max-width: 740px) {
@@ -11,6 +12,7 @@ header,
   header,
   .view {
     height: 1000px;
+    position: relative;
   }
 }
 @media (min-width: 800px) and (max-width: 850px) {
@@ -19,6 +21,7 @@ header,
   header,
   .view {
     height: 650px;
+    position: relative;
   }
 }
 
