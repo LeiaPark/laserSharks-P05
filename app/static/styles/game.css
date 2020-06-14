@@ -24,9 +24,23 @@ body {
   width: 300px;
 }
 
+#play{
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.middle{
+  margin-top: 25%;
+}
+
+.left{
+  margin-left: 45%;
+}
+
 #answerpic {
   height: 500px;
   width: 300px;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  margin-left: 45%;
 }
 
 .card-img-top {

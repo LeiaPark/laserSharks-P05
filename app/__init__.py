@@ -198,6 +198,7 @@ def game():
 @app.route('/checkanswer')
 def check():
     ans = request.args.get('answer')
+    session['answer'] = ans
     if(ans==session['randompokemon'][0]):
         return redirect(url_for("win"))
     else:
@@ -205,11 +206,17 @@ def check():
 
 @app.route('/win')
 def win():
-    return render_template('win.html', mon = session['randompokemon'])
+    if('answer' in session):
+        session.pop('answer', None)
+        return render_template('win.html', mon = session['randompokemon'])
+    return redirect(url_for("game"))
 
 @app.route('/lose')
 def lose():
-    return render_template('lose.html', mon = session['randompokemon'])
+    if('answer' in session):
+        session.pop('answer', None)
+        return render_template('lose.html', mon = session['randompokemon'])
+    return redirect(url_for("game"))
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()

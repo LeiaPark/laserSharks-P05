@@ -1,7 +1,7 @@
 {% extends "game.html" %}
 
 {% block col1 %}
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center left">
   <div class="card m-5" id="answerpic">
     <form action="/search" method="get">
       <button type="submit" name="keyword" id="picbutton">
@@ -23,8 +23,8 @@
 {% endblock %}
 
 {% block col2 %}
-<div class="container">
-  <div class="card m-5">
+<div class="container middle">
+  <div class="card m-5" id="play">
     <div class="card-body text-center">
       <h4 class="card-title">{% block badjob %}Great Job{% endblock %}</h4>
       <form action="/game">
