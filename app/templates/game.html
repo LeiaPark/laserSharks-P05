@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+Who's That Pokemon?
+{% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/game.css') }}">
+{% endblock %}
+
+{%block navcontents%}
+<li class="nav-item mx-2">
+  <form method="GET" action="/logout">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Log Out</button>
+  </form>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Home</button>
+  </form>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/favorites">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Favorite Pokemon</button>
+  </form>
+</li>
+{% endblock %}
+
+{% block body %}
+<div class="container-flex m-5 p-2 rounded mr-3 text-center" id="heading">
+  <h1 class="display-1">Who's That Pokemon?</h1>
+</div>
+<div class="container-flex m-5 p-2 rounded mr-3" id="bg1">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <img src="" alt="" id="pic" class="card-img-top">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var pokemon = {{mon | safe}};
+  var img = document.getElementById("pic");
+  img.setAttribute("src", pokemon[2]);
+</script>
+{% endblock %}

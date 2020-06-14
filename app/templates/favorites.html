@@ -9,12 +9,17 @@ Favorites
 {%block navcontents%}
 <li class="nav-item mx-2">
   <form method="GET" action="/logout">
-    <button class="btn btn-outline-dark" type="submit">Log Out</button>
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Log Out</button>
   </form>
 </li>
 <li class="nav-item mx-2">
   <form method="GET" action="/">
-    <button class="btn btn-outline-dark" type="submit">Home</button>
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Home</button>
+  </form>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/game">
+    <button class="btn btn-outline-dark"  id="navbutton" type="submit">Who's That Pokemon?</button>
   </form>
 </li>
 {% endblock %}

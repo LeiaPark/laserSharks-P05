@@ -3,7 +3,7 @@ import os
 import json
 import urllib
 import random
-
+from random import randint
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -42,7 +42,7 @@ if db_functions.check('gen7'):
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
 print(len(mons))
-
+randompokemon=[]
 def get_monname(name):
     name = name.lower().strip()
     for pokemon in mons:
@@ -185,6 +185,29 @@ def logout():
     flash("Logged Out Succesfully")
     return redirect(url_for("index"))
 
+@app.route('/game')
+def game():
+    if 'user' in session:
+        randompokemon = mons[randint(0, len(mons) - 1)]
+        return render_template('game.html', mon = randompokemon)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/checkanswer')
+def check():
+    ans = request.args.get('answer')
+    if(ans==randompokemon[0]):
+        return redirect(url_for("win"))
+    else:
+        return redirect(url_for("lose"))
+
+@app.route('/win')
+def win():
+    return render_template('win.html', mon = randompokemon)
+
+@app.route('/lose')
+def lose():
+    return render_template('lose.html', mon = randompokemon)
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()
