@@ -123,6 +123,8 @@ Homepage
       row =  document.createElement("DIV");
       row.setAttribute("class", "row");
     }
+    var outerbutton = document.createElement("BUTTON");
+    var form = document.createElement("FORM");
     var col = document.createElement("DIV");
     var card = document.createElement("DIV");
     var cardhead = document.createElement("H5");
@@ -168,13 +170,19 @@ Homepage
 	  };
 */
 	  //mons.setAttribute("style", "display: grid;");
-
+    form.setAttribute("method", "GET");
+    form.setAttribute("action", "/search");
 	  types.innerHTML = ty;
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
-	  button.setAttribute("class", "btn btn-outline-success")
+	  button.setAttribute("class", "btn btn-outline-success");
     col.setAttribute("class", "col my-2");
     card.setAttribute("class", "card");
+    outerbutton.setAttribute("type", "submit");
+    outerbutton.setAttribute("value", n);
+    outerbutton.setAttribute("name", "keyword");
+    outerbutton.setAttribute("class", "btn btn-outline-warning");
+    outerbutton.setAttribute("id", "picbutton");
     cardbody.setAttribute("class", "card-body text-center");
     cardhead.setAttribute("class", "card-title text-center");
     badges.setAttribute("class", "container m-2")
@@ -182,7 +190,8 @@ Homepage
 	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
-    card.appendChild(image);
+    outerbutton.appendChild(image)
+    card.appendChild(outerbutton);
     cardbody.appendChild(cardhead);
 
 	  var get_type = function(type) {
@@ -230,7 +239,8 @@ Homepage
     cardbody.appendChild(badges);
     cardbody.appendChild(button);
     card.appendChild(cardbody);
-    col.appendChild(card);
+    form.appendChild(card);
+    col.appendChild(form);
 	  t = t - 1;
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
@@ -262,6 +272,7 @@ Homepage
           row =  document.createElement("DIV");
           row.setAttribute("class", "row");
         }
+        var form = document.createElement("FORM");
         var col = document.createElement("DIV");
         var card = document.createElement("DIV");
         var cardhead = document.createElement("H5");
@@ -270,17 +281,25 @@ Homepage
         var types = document.createElement("P");
         var par = document.createElement("P");
         var button = document.createElement("BUTTON");
+        var outerbutton = document.createElement("BUTTON");
         var br = document.createElement("BR");
         var badges = document.createElement("DIV");
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
 	  ty = pokemon[t][3];
+    form.setAttribute("method", "GET");
+    form.setAttribute("action", "/search");
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", i);
     image.setAttribute("class", "card-img-top");
     image.setAttribute("height", "auto");
     image.setAttribute("width", "auto");
+    outerbutton.setAttribute("type", "submit");
+    outerbutton.setAttribute("value", n);
+    outerbutton.setAttribute("name", "keyword");
+    outerbutton.setAttribute("class", "btn btn-outline-warning");
+    outerbutton.setAttribute("id", "picbutton");
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
 	  button.setAttribute("class", "btn btn-outline-success")
@@ -294,7 +313,8 @@ Homepage
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
     cardhead.innerHTML = n + "   #" +  id;
-    card.appendChild(image);
+    outerbutton.appendChild(image);
+    card.appendChild(outerbutton);
     cardbody.appendChild(cardhead);
 
 	  var get_type = function(type) {
@@ -342,7 +362,8 @@ Homepage
     cardbody.appendChild(badges);
     cardbody.appendChild(button);
     card.appendChild(cardbody);
-    col.appendChild(card);
+    form.appendChild(card);
+    col.appendChild(form);
 	  t = t - 1;
 	  button.onclick = function() {
 	      var form = document.getElementById("f");

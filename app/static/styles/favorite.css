@@ -7,6 +7,10 @@ body {
     width: 100%;
 }
 
+#picbutton{
+  border-width: 0px !important;
+}
+
 .card {
   background-color: rgba(245, 245, 245, 0.7) !important;
 }

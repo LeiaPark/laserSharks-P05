@@ -4,6 +4,10 @@ body {
     background-attachment: fixed;
 }
 
+#picbutton{
+  border-width: 0px !important;
+}
+
 .badge-normal {
     background-color: #838683;
     color: white;

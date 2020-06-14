@@ -39,6 +39,7 @@ Favorites
   row.setAttribute("class", "row row-cols-5");
   for(var i = 0; i <= t; i++) {
       if (favorites.includes(pokemon[i][1])) {
+    var form = document.createElement("FORM");
     var col = document.createElement("DIV");
     var card = document.createElement("DIV");
     var cardhead = document.createElement("H5");
@@ -46,6 +47,7 @@ Favorites
 	  var image = document.createElement("IMG");
 	  var types = document.createElement("P");
 	  var par = document.createElement("P");
+    var outerbutton = document.createElement("BUTTON");
 	  var button = document.createElement("BUTTON");
 	  var br = document.createElement("BR");
     var badges = document.createElement("DIV");
@@ -53,11 +55,18 @@ Favorites
 	  id = pokemon[i][1];
 	  im = pokemon[i][2];
 	  ty = pokemon[i][3];
+    form.setAttribute("method", "GET");
+    form.setAttribute("action", "/search");
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", im);
     image.setAttribute("class", "card-img-top");
     image.setAttribute("height", "auto");
     image.setAttribute("width", "auto");
+    outerbutton.setAttribute("type", "submit");
+    outerbutton.setAttribute("value", n);
+    outerbutton.setAttribute("name", "keyword");
+    outerbutton.setAttribute("class", "btn btn-outline-warning");
+    outerbutton.setAttribute("id", "picbutton");
 	  button.innerHTML = "Remove from Favorites";
 	  button.setAttribute("value",id);
     button.setAttribute("class", "btn btn-outline-danger");
@@ -67,7 +76,8 @@ Favorites
     cardhead.setAttribute("class", "card-title text-center");
     badges.setAttribute("class", "container m-2")
     cardhead.innerHTML = n + "   #" +  id;
-	  card.appendChild(image);
+    outerbutton.appendChild(image);
+    card.appendChild(outerbutton);
     cardbody.appendChild(cardhead);
 
     var get_type = function(type) {
@@ -104,7 +114,8 @@ Favorites
     cardbody.appendChild(badges);
 	  cardbody.appendChild(button);
     card.appendChild(cardbody);
-    col.appendChild(card);
+    form.appendChild(card);
+    col.appendChild(form);
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
 	      var pid = form.elements['pokemon_id'];
