@@ -111,6 +111,12 @@ Search
           <div class="col-4"></div>
         </div>
       </div>
+      <div class="container-flex mt-2 bg-light rounded mr-2">
+        <form action="/add" id="f">
+          <button id="add"></button>
+          <input type="number" name="pokemon_id" style="display: none;"/>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -163,6 +169,21 @@ Search
       badge.innerHTML = types[i];
       h.appendChild(badge)
       mons.appendChild(h);
+  };
+
+  var button = document.getElementById("add");
+  button.innerHTML = "Add to Favorites";
+  console.log(pokemon[1]);
+  button.setAttribute("value",pokemon[1]);
+  button.setAttribute("class", "btn btn-outline-success btn-block p-3");
+  button.onclick = function() {
+      var form = document.getElementById("f");
+      var pid = form.elements['pokemon_id'];
+      form.addEventListener('submit', (event) => {
+    //console.log(this.getAttribute("value"));
+    pid.value = this.getAttribute("value");
+      });
+      button.disabled = false;
   };
 
   var stats = pokemon[6].split(' ');
