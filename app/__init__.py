@@ -162,10 +162,16 @@ def hasNumbers(inputString):
 def search():
     s = request.args.get('keyword')
     if get_monname(s):
-        return render_template('search.html', search=s, result=get_monname(s))
+        user="null"
+        if 'user' in session:
+            user=session['user']
+        return render_template('search.html', search=s, result=get_monname(s), user=user)
     elif hasNumbers(s):
         if get_monid(int(s)):
-            return render_template('search.html', search=s, result=get_monid(int(s)))
+            user="null"
+            if 'user' in session:
+                user=session['user']
+            return render_template('search.html', search=s, result=get_monid(int(s)), user=user)
         else:
             flash('ID not found')
             return redirect(url_for('index'))

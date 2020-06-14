@@ -6,75 +6,123 @@ Search
 {% block stylesheet %}
   <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/search.css') }}">
 {% endblock %}
+
+{%block navcontents%}
+{% if user == 'null' %}
+  <li class="nav-item mx-2">
+    <form method="GET" action="/login">
+      <button class="btn btn-outline-dark" type="submit">Login</button>
+    </form>
+  </li>
+{% else %}
+  <li class="nav-item mx-2">
+    <form method="GET" action="/logout">
+      <button class="btn btn-outline-dark" type="submit">Log Out</button>
+    </form>
+  </li>
+{% endif %}
+<li class="nav-item mx-2">
+  <form method="GET" action="/favorites">
+    <button class="btn btn-outline-dark" type="submit">Favorite Pokemon</button>
+  </form>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/">
+    <button class="btn btn-outline-dark" type="submit">Home</button>
+  </form>
+</li>
+{% endblock %}
+
+{% block search %}
+<!-- here lies the search bar -->
+<form class="form-inline mx-2 mx-lg-0" action="/search" method="GET">
+  <div class="md-form my-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="enter name or ID" aria-label="Search" name="keyword">
+  </div>
+  <button class="btn btn-outline-primary btn-md mx-2 ml-sm-2" type="submit">Search</button>
+</form>
+{% endblock %}
+
 {% block body %}
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<div style="width: 100%;" id="bigdiv">
-  <div class="text-center" id="dex" style="width: 50%;  float: left;">
-    <!-- <h1>Searches for: {{ search }}</h1> -->
-    <br>
-    <h2 id="name"></h2>
-    <br>
-    <h2 id="id"></h2>
-    <img id="image" width='200' height='200'></img>
-    <br>
-    <div id="badge"></div><br>
+<div class="container-flex pokedex m-3 p-2" id="bigdiv">
+  <div class="row row-cols-2">
+    <div class="col">
+      <div class="card text-center p-5">
+        <img id="image" class="card-img-top" width="150px"></img>
+        <div class="card-body">
+          <h1 class="card-title">Searches for: {{ search }}</h1>
+          <hr>
+          <h2 id="name"></h2>
+          <hr>
+          <h2 id="id"></h2>
+          <hr>
+          <div id="badge"></div><br>
 
-    <!-- This be the table -->
-    
-    <table class="text:center" style="width:40%;" id="tab" align="center">
-      <tr>
-	<th>HP</th>
-	<td id="hp"></td>
-      </tr>
-      <tr>
-	<th>Attack</th>
-	<td id="attack"></td>
-      </tr>
-      <tr>
-	<th>Defense</th>
-	<td id="defense"></td>
-      </tr>
-      <tr>
-	<th>Special Attack</th>
-	<td id="specialattack"></td>
-      </tr>
-      <tr>
-	<th>Special Defense</th>
-	<td id="specialdefense"></td>
-      </tr>
-      <tr>
-	<th>Speed</th>
-	<td id="speed"></td>
-      </tr>
-    </table>
-    
+          <!-- This be the table -->
 
-    
-  </div>
-  <br>
-  <div id="stats" style="margin-left: 10%;">
-    <br><br><br>
-    <h5 id="weight"></h5>
-    <h5 id="height"></h5>
+          <table class="text:center" style="width:40%;" id="tab" align="center">
+            <tr>
+            	<th>HP</th>
+            	<td id="hp"></td>
+            </tr>
+            <tr>
+            	<th>Attack</th>
+            	<td id="attack"></td>
+            </tr>
+            <tr>
+            	<th>Defense</th>
+            	<td id="defense"></td>
+            </tr>
+            <tr>
+            	<th>Special Attack</th>
+            	<td id="specialattack"></td>
+            </tr>
+            <tr>
+            	<th>Special Defense</th>
+            	<td id="specialdefense"></td>
+            </tr>
+            <tr>
+            	<th>Speed</th>
+            	<td id="speed"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class = "card text-center p-5" id="stats">
+        <h5 class="card-title" id="weight"></h5>
+        <hr>
+        <h5 lass="card-title" id="height"></h5>
+        <hr>
+        <div class="row row-cols-3">
+          <div class="col-2"></div>
+          <div class="col">
+            <div id="graph"></div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<br><br>
 
 <script>
-  
+
   var pokemon = {{ result | safe }}
   var mons = document.getElementById("badge");
   var n = document.getElementById('name');
   cn = pokemon[0].charAt(0).toUpperCase() + pokemon[0].slice(1);
   n.innerHTML = cn;
-  
+
   var d = document.getElementById('id');
   console.log(pokemon[1] < 10)
   if (pokemon[1] < 10) { d.innerHTML = "#00" + pokemon[1]; }
   else if (pokemon[1] > 10 && pokemon[1] < 100) { d.innerHTML = "#0" + pokemon[1]; }
   else { d.innerHTML = "#" + pokemon[1]; }
-  
+
   var i = document.getElementById('image');
   i.setAttribute('src',pokemon[2]);
 
@@ -116,7 +164,7 @@ Search
   for (i = 0; i < 6; i++) {
       stats[i] = parseInt(stats[i]);
   };
-  
+
   var hp = document.getElementById("hp");
   hp.innerHTML = stats[0];
   var attack = document.getElementById("attack");
@@ -129,7 +177,7 @@ Search
   specialdefense.innerHTML = stats[4];
   var hp = document.getElementById("speed");
   speed.innerHTML = stats[5];
-  
+
   var w = document.getElementById("weight");
   w.innerHTML = "Weight: " + pokemon[4] + " hectograms";
   var h = document.getElementById("height");
@@ -146,15 +194,15 @@ Search
   point[features[4]] = stats[4];
   point[features[5]] = stats[5];
   data.push(point);
-  let svg = d3.select("body").append("svg")
+  let svg = d3.select("#graph").append("svg")
       .attr("width", 600)
       .attr("height", 400);
-  
+
   let radialScale = d3.scaleLinear()
       .domain([0,255])
       .range([0,180]);
   let ticks = [50,100,150,200,250];
-  
+
   ticks.forEach(t =>
 		svg.append("circle")
 		.attr("cx", 200)
