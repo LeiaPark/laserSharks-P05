@@ -140,6 +140,7 @@ def favorites():
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if 'user' in session:
+        print(request.args.get('pokemon_id'))
         db_functions.add_fave(session['id'],request.args.get('pokemon_id'))
         flash('Added to Favorites')
         return redirect(url_for('index'))
@@ -188,26 +189,27 @@ def logout():
 @app.route('/game')
 def game():
     if 'user' in session:
-        randompokemon = mons[randint(0, len(mons) - 1)]
-        return render_template('game.html', mon = randompokemon)
+        session['randompokemon'] = mons[randint(0, len(mons) - 1)]
+        print(session['randompokemon'])
+        return render_template('game.html', mon = session['randompokemon'])
     else:
         return redirect(url_for('login'))
 
 @app.route('/checkanswer')
 def check():
     ans = request.args.get('answer')
-    if(ans==randompokemon[0]):
+    if(ans==session['randompokemon'][0]):
         return redirect(url_for("win"))
     else:
         return redirect(url_for("lose"))
 
 @app.route('/win')
 def win():
-    return render_template('win.html', mon = randompokemon)
+    return render_template('win.html', mon = session['randompokemon'])
 
 @app.route('/lose')
 def lose():
-    return render_template('lose.html', mon = randompokemon)
+    return render_template('lose.html', mon = session['randompokemon'])
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()

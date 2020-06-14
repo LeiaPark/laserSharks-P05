@@ -1,0 +1,80 @@
+{% extends "game.html" %}
+
+{% block col1 %}
+<div class="card m-3">
+  <form class="" action="/search" method="get">
+    <button type="submit" name="keyword" id="picbutton">
+      <img src="" alt="" id="pic" class="card-img-top">
+    </button>
+  </form>
+  <div class="card-body text-center">
+    <h5 class="card-title" id="msg"></h5>
+      <div class="container m-2" id="badges"></div>
+    <div class="d-flex justify-content-center">
+      <form action="/add" method="GET" id="f">
+        <button id="add"></button>
+        <input type="number" name="pokemon_id" style="display: none;"/>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  var pokemon = {{mon | safe}};
+  var img = document.getElementById("pic");
+  img.setAttribute("src", pokemon[2]);
+  var title = document.getElementById("msg");
+  title.innerHTML = "Yes It is " + pokemon[0];
+  var outerbutton = document.getElementById("picbutton");
+  outerbutton.setAttribute("value", pokemon[0]);
+  outerbutton.setAttribute("class", "btn btn-outline-warning");
+  outerbutton.setAttribute("id", "picbutton");
+  var get_type = function(type) {
+      if (type === "normal") return "badge-normal";
+      else if (type === "fighting") return "badge-fighting";
+      else if (type === "flying") return "badge-flying";
+      else if (type === "poison") return "badge-poison";
+      else if (type === "ground") return "badge-ground";
+      else if (type === "rock") return "badge-rock";
+      else if (type === "bug") return "badge-bug";
+      else if (type === "ghost") return "badge-ghost";
+      else if (type === "steel") return "badge-steel";
+      else if (type === "fire") return "badge-fire";
+      else if (type === "water") return "badge-water";
+      else if (type === "grass") return "badge-grass";
+      else if (type === "electric") return "badge-electric";
+      else if (type === "psychic") return "badge-psychic";
+      else if (type === "ice") return "badge-ice";
+      else if (type === "dragon") return "badge-dragon";
+      else if (type === "fairy") return "badge-fairy";
+      else if (type === "dark") return "badge-dark";
+  }
+  var badges = document.getElementById("badges");
+  var m = pokemon[3];
+  var types = m.split(' ');
+  l = m.split(' ').length-1;
+  for (i = 0; i < l; i++) {
+      var badge = document.createElement("SPAN");
+      badge.setAttribute("class","badge badge-pill " + get_type(types[i]));
+      badge.innerHTML = types[i];
+      badges.appendChild(badge);
+  };
+  var button = document.getElementById("add");
+  button.innerHTML = "Add to Favorites";
+  console.log(pokemon[1]);
+  button.setAttribute("value",pokemon[1]);
+  button.setAttribute("class", "btn btn-outline-success");
+  button.onclick = function() {
+      var form = document.getElementById("f");
+      var pid = form.elements['pokemon_id'];
+      form.addEventListener('submit', (event) => {
+    //console.log(this.getAttribute("value"));
+    pid.value = this.getAttribute("value");
+      });
+      button.disabled = false;
+  };
+</script>
+{% endblock %}

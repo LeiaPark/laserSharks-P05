@@ -195,8 +195,9 @@ Homepage
 	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
-    outerbutton.appendChild(image)
-    card.appendChild(outerbutton);
+    outerbutton.appendChild(image);
+    form.appendChild(outerbutton);
+    card.appendChild(form);
     cardbody.appendChild(cardhead);
 
 	  var get_type = function(type) {
@@ -244,8 +245,7 @@ Homepage
     cardbody.appendChild(badges);
     cardbody.appendChild(button);
     card.appendChild(cardbody);
-    form.appendChild(card);
-    col.appendChild(form);
+    col.appendChild(card);
 	  t = t - 1;
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
@@ -319,7 +319,8 @@ Homepage
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
     cardhead.innerHTML = n + "   #" +  id;
     outerbutton.appendChild(image);
-    card.appendChild(outerbutton);
+    form.appendChild(outerbutton);
+    card.appendChild(form);
     cardbody.appendChild(cardhead);
 
 	  var get_type = function(type) {
@@ -367,8 +368,7 @@ Homepage
     cardbody.appendChild(badges);
     cardbody.appendChild(button);
     card.appendChild(cardbody);
-    form.appendChild(card);
-    col.appendChild(form);
+    col.appendChild(card);
 	  t = t - 1;
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
