@@ -1,19 +1,34 @@
 {% extends "game.html" %}
 
 {% block col1 %}
-<div class="card m-3">
-  <form class="" action="/search" method="get">
-    <button type="submit" name="keyword" id="picbutton">
-      <img src="" alt="" id="pic" class="card-img-top">
-    </button>
-  </form>
-  <div class="card-body text-center">
-    <h5 class="card-title" id="msg"></h5>
-      <div class="container m-2" id="badges"></div>
-    <div class="d-flex justify-content-center">
-      <form action="/add" method="GET" id="f">
-        <button id="add"></button>
-        <input type="number" name="pokemon_id" style="display: none;"/>
+<div class="d-flex justify-content-center">
+  <div class="card m-5" id="answerpic">
+    <form action="/search" method="get">
+      <button type="submit" name="keyword" id="picbutton">
+        <img src="" alt="" id="pic" class="card-img-top">
+      </button>
+    </form>
+    <div class="card-body text-center">
+      <h5 class="card-title" id="msg"></h5>
+        <div class="container-flex m-2 text-center" id="badges"></div>
+      <div class="d-flex justify-content-center">
+        <form action="/add" method="GET" id="f">
+          <button id="add"></button>
+          <input type="number" name="pokemon_id" style="display: none;"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block col2 %}
+<div class="container">
+  <div class="card m-5">
+    <div class="card-body text-center">
+      <h4 class="card-title">{% block badjob %}Great Job{% endblock %}</h4>
+      <form action="/game">
+        <button type="submit" name="button" class="btn btn-success">Play Again</button>
       </form>
     </div>
   </div>
@@ -21,17 +36,19 @@
 
 {% endblock %}
 
+
 {% block script %}
 <script>
   var pokemon = {{mon | safe}};
   var img = document.getElementById("pic");
   img.setAttribute("src", pokemon[2]);
+  img.setAttribute("value", pokemon[1]);
   var title = document.getElementById("msg");
-  title.innerHTML = "Yes It is " + pokemon[0];
+  title.innerHTML = "It's ... " + pokemon[0];
   var outerbutton = document.getElementById("picbutton");
   outerbutton.setAttribute("value", pokemon[0]);
-  outerbutton.setAttribute("class", "btn btn-outline-warning");
-  outerbutton.setAttribute("id", "picbutton");
+  outerbutton.setAttribute("class", "btn btn-outline-warning p-4");
+  outerbutton.setAttribute("style", "width:100%;");
   var get_type = function(type) {
       if (type === "normal") return "badge-normal";
       else if (type === "fighting") return "badge-fighting";

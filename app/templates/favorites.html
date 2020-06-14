@@ -71,6 +71,7 @@ Favorites
     outerbutton.setAttribute("value", n);
     outerbutton.setAttribute("name", "keyword");
     outerbutton.setAttribute("class", "btn btn-outline-warning");
+    outerbutton.setAttribute("style", "width:100%;");
     outerbutton.setAttribute("id", "picbutton");
 	  button.innerHTML = "Remove from Favorites";
 	  button.setAttribute("value",id);
@@ -82,7 +83,8 @@ Favorites
     badges.setAttribute("class", "container m-2")
     cardhead.innerHTML = n + "   #" +  id;
     outerbutton.appendChild(image);
-    card.appendChild(outerbutton);
+    form.appendChild(outerbutton);
+    card.appendChild(form);
     cardbody.appendChild(cardhead);
 
     var get_type = function(type) {
@@ -119,8 +121,7 @@ Favorites
     cardbody.appendChild(badges);
 	  cardbody.appendChild(button);
     card.appendChild(cardbody);
-    form.appendChild(card);
-    col.appendChild(form);
+    col.appendChild(card);
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
 	      var pid = form.elements['pokemon_id'];

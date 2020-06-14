@@ -33,7 +33,7 @@ Who's That Pokemon?
   <div class="row">
     <div class="col">
       {% block col1 %}
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center m-5">
           <div class="card" id="picture">
             <img src="" alt="" id="pic" class="card-img-top">
           </div>
@@ -42,13 +42,14 @@ Who's That Pokemon?
     </div>
     <div class="col">
       {% block col2 %}
-        <div class="card">
+      <div class="container">
+        <div class="card m-5">
           <div class="card-body">
             <h4 class="card-title">How To Play:</h4>
             <p class="card-text">Type in the pokemon's name in the space provided. Don't worry. It's a learning experience</p>
           </div>
         </div>
-        <div class="card">
+        <div class="card m-5">
           <div class="card-body">
             <form method="get" action="/checkanswer">
              <div class="form-group ">
@@ -73,6 +74,8 @@ Who's That Pokemon?
             </form>
           </div>
         </div>
+      </div>
+
       {% endblock %}
     </div>
   </div>
