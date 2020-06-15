@@ -144,37 +144,13 @@ Homepage
 	  n = pokemon[t][0];
 	  id = pokemon[t][1];
 	  i = pokemon[t][2];
-	  ty = pokemon[t][3];
+	  ty = pokemon[t][6];
 	  //console.log(ty.split(' '));
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", i);
     image.setAttribute("class", "card-img-top");
     image.setAttribute("height", "auto");
     image.setAttribute("width", "auto");
-	  /*
-	  image.setAttribute("onclick", "return false;");
-	  image.setAttribute("ondblclick", "return false;");
-	  image.ondblclick = function() {
-	      //var input = document.createElement("INPUT");
-	      var form = document.createElement("FORM");
-	      var input = document.createElement("INPUT");
-	      //console.log(this.getAttribute("value"));
-	      input.setAttribute("type","number");
-	      input.setAttribute("id","yee");
-	      input.setAttribute("value", this.getAttribute("value"));
-	      this.appendChild(input);
-	      //image.appendChild(input);
-	      //document.getElementById("f").appendChild(input);
-	      //document.getElementById("f").submit();
-	      form.setAttribute("action","/add");
-	      form.setAttribute("method","POST");
-	      //console.log(this);
-	      form.appendChild(this);
-	      document.getElementById("f").submit();
-	      //return this.getAttribute("value");
-	  };
-*/
-	  //mons.setAttribute("style", "display: grid;");
     form.setAttribute("method", "GET");
     form.setAttribute("action", "/search");
 	  types.innerHTML = ty;
@@ -192,7 +168,7 @@ Homepage
     cardbody.setAttribute("class", "card-body text-center");
     cardhead.setAttribute("class", "card-title text-center");
     badges.setAttribute("class", "container m-2")
-    cn = n.charAt(0).toUpperCase() + n.slice(1);
+    var cn = n.charAt(0).toUpperCase() + n.slice(1);
 	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
@@ -222,7 +198,7 @@ Homepage
 	      else if (type === "dark") return "badge-dark";
 	  }
 
-	  var m = pokemon[t][3];
+	  var m = pokemon[t][6];
 	  types = m.split(' ');
 	  l = m.split(' ').length-1;
 	  for (i = 0; i < l; i++) {
@@ -231,17 +207,6 @@ Homepage
 	      badge.innerHTML = types[i];
 	      badges.appendChild(badge);
 	  };
-
-	  /*len = ty.split(' ').length-1;
-	  k = 0;
-	  ts = ty.split(' ');
-	  while (k < len) {
-	      var badge = document.createElement("SPAN");
-	      badge.setAttribute("class","badge badge-pill badge-success");
-	      badge.innerHTML = ts[k];
-	      k++;
-	      mons.appendChild(badge);
-	  };*/
 
     cardbody.appendChild(badges);
     cardbody.appendChild(button);
@@ -293,7 +258,7 @@ Homepage
 	  n = pokemon[t][0];
 	  id = pokemon[t][1]
 	  i = pokemon[t][2];
-	  ty = pokemon[t][3];
+	  ty = pokemon[t][6];
     form.setAttribute("method", "GET");
     form.setAttribute("action", "/search");
 	  image.setAttribute("value",id);
@@ -315,11 +280,10 @@ Homepage
     cardbody.setAttribute("class", "card-body text-center");
     cardhead.setAttribute("class", "card-title text-center");
     badges.setAttribute("class", "container m-2");
-    cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  var cn = n.charAt(0).toUpperCase() + n.slice(1);
 	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
-    cardhead.innerHTML = n + "   #" +  id;
     outerbutton.appendChild(image);
     form.appendChild(outerbutton);
     card.appendChild(form);
@@ -346,7 +310,7 @@ Homepage
 	      else if (type === "dark") return "badge-dark";
 	  }
 
-	  var m = pokemon[t][3];
+	  var m = pokemon[t][6];
 	  types = m.split(' ');
 	  l = m.split(' ').length-1;
 	  for (i = 0; i < l; i++) {

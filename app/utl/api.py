@@ -29,7 +29,22 @@ def get_gen1():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        #temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -61,7 +76,21 @@ def get_gen2():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -94,7 +123,21 @@ def get_gen3():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -127,7 +170,21 @@ def get_gen4():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -160,7 +217,21 @@ def get_gen5():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -193,7 +264,21 @@ def get_gen6():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -226,7 +311,21 @@ def get_gen7():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):

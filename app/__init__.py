@@ -39,8 +39,11 @@ if db_functions.check('gen7'):
     print("ADDING GENERATION 7...")
     db_functions.add_gen('gen7',api.get_gen7())
 
+print(None == None)
+
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
+#print(mons)
 print(len(mons))
 randompokemon=[]
 def get_monname(name):

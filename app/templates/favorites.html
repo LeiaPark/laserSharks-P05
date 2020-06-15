@@ -59,7 +59,7 @@ Favorites
 	  n = pokemon[i][0];
 	  id = pokemon[i][1];
 	  im = pokemon[i][2];
-	  ty = pokemon[i][3];
+	  ty = pokemon[i][6];
     form.setAttribute("method", "GET");
     form.setAttribute("action", "/search");
 	  image.setAttribute("value",id);
@@ -79,9 +79,13 @@ Favorites
     col.setAttribute("class", "col my-2");
     card.setAttribute("class", "card");
     cardbody.setAttribute("class", "card-body text-center");
-    cardhead.setAttribute("class", "card-title text-center");
+	  cardhead.setAttribute("class", "card-title text-center");
+	  var cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
+	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
+	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
     badges.setAttribute("class", "container m-2")
-    cardhead.innerHTML = n + "   #" +  id;
+    //cardhead.innerHTML = n + "   #" +  id;
     outerbutton.appendChild(image);
     form.appendChild(outerbutton);
     card.appendChild(form);

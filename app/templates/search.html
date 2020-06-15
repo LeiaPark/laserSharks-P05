@@ -40,7 +40,6 @@ Search
 {% endblock %}
 
 {% block search %}
-<!-- here lies the search bar -->
 <form class="form-inline mx-2 mx-lg-0" action="/search" method="GET">
   <div class="md-form my-0">
     <input class="form-control mr-sm-2" type="search" placeholder="enter name or ID" aria-label="Search" name="keyword">
@@ -56,7 +55,14 @@ Search
   <div class="row row-cols-2">
     <div class="col">
       <div class="card text-center p-5">
-        <img id="image" class="card-img-top" width="150px"></img>
+        <img id="front_default" class="card-img-top" width="150px"></img>
+	<img id="front_shiny" class="card-img-top" width="150px" style="display:none" /></img>
+	<img id="back_default" class="card-img-top" width="150px" style="display:none" /></img>
+	<img id="back_shiny" class="card-img-top" width="150px" style="display:none" /></img>
+
+	<button id="shiny">Shiny</button>
+	<button id="view">Back</button>
+	
         <div class="card-body">
           <h1 class="card-title">Searches for: {{ search }}</h1>
           <hr>
@@ -135,9 +141,90 @@ Search
   else if (pokemon[1] > 10 && pokemon[1] < 100) { d.innerHTML = "#0" + pokemon[1]; }
   else { d.innerHTML = "#" + pokemon[1]; }
 
-  var i = document.getElementById('image');
-  i.setAttribute('src',pokemon[2]);
+  var f_default = document.getElementById('front_default');
+  f_default.setAttribute('src',pokemon[2]);
+  var f_shiny = document.getElementById('front_shiny');
+  f_shiny.setAttribute('src',pokemon[4]);
+  var shinybutton = document.getElementById("shiny");
+  var set = true;  //true = default, false = shiny
+  var viewbutton = document.getElementById("view");
+  var b_default = document.getElementById('back_default');
+  var b_shiny = document.getElementById('back_shiny');
+  b_default.setAttribute('src',pokemon[3]);
+  b_shiny.setAttribute('src',pokemon[5]);
+  var vset = true; //true = frontview, false = backview
+  var shiny_switch = function() {
+      if (!set && vset) {
+	  f_default.setAttribute('style','display:block');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:none');
+	  shinybutton.innerHTML = 'Shiny';
+	  set = true;
+      }
+      else if (set && !vset) {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:block');
+	  shinybutton.innerHTML = 'Default';
+	  set = false;
+      }
+      else if (vset && set) {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:block');
+	  b_shiny.setAttribute('style','display:none');
+	  shinybutton.innerHTML = 'Default';
+	  set = false;
+      }
+      else {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:block');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:none');
+	  shinybutton.innerHTML = 'Front';
+	  set = true;
+      }
+  }
+  var view_switch = function() {
+      if (!set && vset) {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:block');
+	  viewbutton.innerHTML = 'Front';
+	  vset = false;
+      }
+      else if (!vset && set) {
+	  f_default.setAttribute('style','display:block');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:none');
+	  viewbutton.innerHTML = 'Back';
+	  vset = true;
+      }
+      else if (vset && set) {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:block');
+	  f_shiny.setAttribute('style','display:none');
+	  b_shiny.setAttribute('style','display:none');
+	  viewbutton.innerHTML = 'Front';
+	  vset = false;
+      }
+      else {
+	  f_default.setAttribute('style','display:none');
+	  b_default.setAttribute('style','display:none');
+	  f_shiny.setAttribute('style','display:block');
+	  b_shiny.setAttribute('style','display:none');
+	  viewbutton.innerHTML = 'Back';
+	  vset = true;
+      }
+  }
+  viewbutton.addEventListener('click',view_switch);
+  shinybutton.addEventListener('click', shiny_switch);
 
+  
   var get_type = function(type) {
       if (type === "normal") return "badge-normal";
       else if (type === "fighting") return "badge-fighting";
@@ -159,7 +246,7 @@ Search
       else if (type === "dark") return "badge-dark";
   }
 
-  var t = pokemon[3];
+  var t = pokemon[6];
   types = t.split(' ');
   l = t.split(' ').length-1;
   for (i = 0; i < l; i++) {
@@ -186,7 +273,7 @@ Search
       button.disabled = false;
   };
 
-  var stats = pokemon[6].split(' ');
+  var stats = pokemon[9].split(' ');
   stats.pop()
   for (i = 0; i < 6; i++) {
       stats[i] = parseInt(stats[i]);
@@ -206,9 +293,9 @@ Search
   speed.innerHTML = stats[5];
 
   var w = document.getElementById("weight");
-  w.innerHTML = "Weight: " + pokemon[4] + " hectograms";
+  w.innerHTML = "Weight: " + pokemon[7] + " hectograms";
   var h = document.getElementById("height");
-  h.innerHTML = "Height: " + pokemon[5] + " decimeters";
+  h.innerHTML = "Height: " + pokemon[8] + " decimeters";
 
   let data = [];
   let features = ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense','Speed']
@@ -274,7 +361,6 @@ Search
   let line = d3.line()
       .x(d => d.x)
       .y(d => d.y);
-  // add some more colors
   let colors = ["darkorange", "navy", "steelblue", "aqua", "aquamarine", "blueviolet", "chartreuse", "chocolate", "coral", "cornflowerblue", "crimson", "darkgoldenrod", "darkmagenta", "darkorchid", "hotpink", "salmon"];
 
   function getPathCoordinates(data_point){
