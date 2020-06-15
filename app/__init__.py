@@ -39,8 +39,6 @@ if db_functions.check('gen7'):
     print("ADDING GENERATION 7...")
     db_functions.add_gen('gen7',api.get_gen7())
 
-print(None == None)
-
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
 #print(mons)
@@ -66,7 +64,7 @@ def get_monid(pokemon_id):
 def get_montypes(types):
     ans = []
     for pokemon in mons:
-        t = pokemon[3].split()
+        t = pokemon[6].split()
         for x in t:
             if x == types:
                 ans.append(pokemon)
@@ -80,7 +78,6 @@ def index():
     # add the if request args stuff djfadjfh
     print(request.args)
     if request.args:
-        print(request.args)
         s = request.args.get('sort')
         if s in gens:
             pokemon = db_functions.retrieve_gen(request.args.get('sort'))
@@ -88,6 +85,8 @@ def index():
             pokemon = get_montypes(s)
         elif s == 'default':
             pokemon = mons
+        elif s == 'random':
+            pokemon = random.sample(mons, len(mons));
     else:
         pokemon = mons
     user="null"
