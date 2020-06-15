@@ -153,6 +153,12 @@ Search
   b_default.setAttribute('src',pokemon[3]);
   b_shiny.setAttribute('src',pokemon[5]);
   var vset = true; //true = frontview, false = backview
+  var has_back = function() {
+      if (pokemon[5] == pokemon[3]) {
+	  viewbutton.setAttribute('style','display:none');
+      }
+  }
+  has_back();
   var shiny_switch = function() {
       if (!set && vset) {
 	  f_default.setAttribute('style','display:block');
@@ -183,7 +189,7 @@ Search
 	  b_default.setAttribute('style','display:block');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  shinybutton.innerHTML = 'Front';
+	  shinybutton.innerHTML = 'Shiny';
 	  set = true;
       }
   }
