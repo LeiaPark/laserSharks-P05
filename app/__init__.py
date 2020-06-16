@@ -46,11 +46,7 @@ if db_functions.check('item'):
     db_functions.add_item('item',api.get_items())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
-#mons = db_functions.retrieve_gen('gen1')
-#print(mons)
-print(len(mons))
 berries = db_functions.retrieve_item('berry') + db_functions.retrieve_item('item')
-
 
 def get_monname(name):
     name = name.lower().strip()
@@ -230,7 +226,7 @@ def lose():
 
 @app.route('/items')
 def items():
-    user ="null"  #this isn't working, the page always has the logout button
+    user ="null"
     if 'user' in session:
         user = session['user']
     if request.args:
@@ -251,7 +247,7 @@ def items():
             item = berries
     else:
         item = berries
-    return render_template('item.html',item=item)
+    return render_template('item.html',item=item, user=user)
 @app.route('/access', methods=['GET', 'POST'])
 def access():
     if 'user' in session:
