@@ -4,7 +4,7 @@
 Homepage
 {% endblock %}
 {% block stylesheet %}
-
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/item.css') }}">
 {% endblock %}
 {%block navcontents%}
 {% if user == 'null' %}
@@ -64,7 +64,7 @@ Homepage
 		 </div>
                </div>
              </form>
-	  
+
         </div>
       </div>
     </div>
@@ -185,14 +185,9 @@ Homepage
 
   display()
 
-  
+
 
 </script>
 
 
 {% endblock %}
-
-
-
-
-
