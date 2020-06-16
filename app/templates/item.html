@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}
+Homepage
+{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/homepage.css') }}">
+{% endblock %}
+{%block navcontents%}
+{% if user == 'null' %}
+<li class="nav-item mx-2">
+  <form method="GET" action="/login">
+    <button class="btn btn-outline-dark"  id="navbutton" type="submit">Login</button>
+  </form>
+</li>
+{% else %}
+<li class="nav-item mx-2">
+  <form method="GET" action="/logout">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Log Out</button>
+  </form>
+</li>
+{% endif %}
+<li class="nav-item mx-2">
+  <form method="GET" action="/favorites">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Favorite Pokemon</button>
+  </form>
+</li>
+<li class="nav-item mx-2">
+  <form method="GET" action="/game">
+    <button class="btn btn-outline-dark" id="navbutton" type="submit">Who's That Pokemon?</button>
+  </form>
+</li>
+{% endblock %}
+{% block search %}
+<form class="form-inline mx-2 mx-lg-0" action="/search" method="GET">
+  <div class="md-form my-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="enter name or ID" aria-label="Search" name="keyword">
+  </div>
+  <button class="btn btn-outline-primary btn-md mx-2 ml-sm-2" type="submit">Search</button>
+</form>
+{% endblock %}
+{% block body %}
+<center>
+  <div class="containter bg-danger rounded m-5 p-2">
+    <div class="container-fluid m-2 p-2 text-center">
+      <div class="row">
+        <div class="col-lg align-self-center">
+        </div>
+      </div>
+    </div>
+    <div class="container m-5">
+      <div class="container-flex m-3 pokedex" id="cont"></div>
+    </div>
+  </div>
+</center>
+
+
+<script>
+
+  var berries = {{ item | safe }}
+
+  //var t = berries.length-1;
+  var display = function(e) {
+      var container = document.getElementById("cont");
+      var perrow = 0;
+      var row;
+      //var p = t - 19;
+      var p = 0;
+      //while (t >= p) {
+      while (p < 64) {
+	  if(perrow == 0){
+	      row =  document.createElement("DIV");
+	      row.setAttribute("class", "row");
+	  }
+	  var outerbutton = document.createElement("BUTTON");
+	  var form = document.createElement("FORM");
+	  var col = document.createElement("DIV");
+	  var card = document.createElement("DIV");
+	  var cardhead = document.createElement("H5");
+	  var cardbody = document.createElement("DIV");
+	  var name = document.createElement("P");
+	  var image = document.createElement("IMG");
+	  var desc = document.createElement("P");
+	  var button = document.createElement("BUTTON");
+	  var br = document.createElement("BR");
+	  var ps = document.createElement("P");
+	  var badges = document.createElement("DIV");
+	  n = berries[p][0];
+	  des = berries[p][1];
+	  im = berries[p][2];
+	  c = berries[p][3];
+	  //console.log(ty.split(' '));
+	  //image.setAttribute("value",id);
+	  image.setAttribute("src", im);
+	  image.setAttribute("class", "card-img-top");
+	  image.setAttribute("height", "auto");
+	  image.setAttribute("width", "auto");
+	  //form.setAttribute("method", "GET");
+	  //form.setAttribute("action", "/search");
+	  //types.innerHTML = ty;
+	  //button.innerHTML = "Add to Favorites";
+	  //button.setAttribute("value",id);
+	  //button.setAttribute("class", "btn btn-outline-success");
+	  col.setAttribute("class", "col my-2");
+	  card.setAttribute("class", "card");
+	  //outerbutton.setAttribute("type", "submit");
+	  //outerbutton.setAttribute("value", n);
+	  //outerbutton.setAttribute("name", "keyword");
+	  //outerbutton.setAttribute("class", "btn btn-outline-warning");
+	  //outerbutton.setAttribute("id", "picbutton");
+	  //outerbutton.setAttribute("style", "width:100%;");
+	  cardbody.setAttribute("class", "card-body text-center");
+	  cardhead.setAttribute("class", "card-title text-center");
+	  badges.setAttribute("class", "container m-2")
+	  //var cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  //if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
+	  //else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
+	  //else { cardhead.innerHTML = cn + "   " + "#" + id; }
+	  var cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  cardhead.innerHTML = cn;
+	  desc.innerHTML = des;
+	  //cardhead.appendChild(desc);
+	  //outerbutton.appendChild(image);
+	  //form.appendChild(outerbutton);
+	  card.appendChild(image);
+	  cardbody.appendChild(cardhead);
+	  cardbody.appendChild(desc);
+
+
+	  cardbody.appendChild(badges);
+	  //cardbody.appendChild(button);
+	  card.appendChild(cardbody);
+	  col.appendChild(card);
+	  p = p + 1;
+	  button.onclick = function() {
+	      var form = document.getElementById("f");
+	      var pid = form.elements['pokemon_id'];
+	      form.addEventListener('submit', (event) => {
+		  //console.log(this.getAttribute("value"));
+		  pid.value = this.getAttribute("value");
+	      });
+	      button.disabled = true;
+	  };
+	  row.appendChild(col);
+	  perrow++
+	  if(perrow>=5){
+	      container.appendChild(row);
+	      perrow = 0;
+	  }
+      };
+  };
+
+  display()
+
+  
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
