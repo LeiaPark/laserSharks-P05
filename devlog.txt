@@ -65,3 +65,9 @@ leiaP -- 2020-06-16 08:45
 - Modified a Game Boy Advance (GBA) Emulator for easy transition into web app
 - Added GBA Emulator in repo as package within templates folder
 - Added Pokemon Game .gba "Pokemon FireRed" within app folder
+
+connorO -- 2020-06-16 14:22
+-Fully implemented the emulator
+-Did the bootstrap for the new items page
+-Fixed button bootstrap for search page
+-Made login page for game
