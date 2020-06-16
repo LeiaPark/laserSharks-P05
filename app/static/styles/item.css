@@ -6,3 +6,8 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.bg-item {
+    background-color: rgba(0, 100, 130, 0.8);
+
+}
