@@ -352,7 +352,6 @@ def get_berries():
         b = urlopen(w).read()
         be = json.loads(b)
         ber = Request(be['item']['url'], headers=headers)
-        #ber = be['item']['url']
         berr = urlopen(ber).read()
         berry = json.loads(berr)
         temp = []
@@ -360,6 +359,26 @@ def get_berries():
         temp.append(berry['flavor_text_entries'][0]['text'])
         temp.append(berry['sprites']['default'])
         temp.append(berry['cost'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_items():
+    request = Request("https://pokeapi.co/api/v2/item/?offset=0&limit=50", headers=headers)
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    m = 49
+    while m >= 0:  
+        w = Request(data['results'][m]['url'], headers=headers)
+        items = urlopen(w).read()
+        itemdata = json.loads(items)
+        temp = []
+        temp.append(data['results'][m]['name'])
+        temp.append(itemdata['flavor_text_entries'][0]['text'])
+        temp.append(itemdata['sprites']['default'])
+        temp.append(itemdata['cost'])
         d.append(temp)
         temp = []
         m = m - 1

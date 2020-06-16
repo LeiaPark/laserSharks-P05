@@ -40,14 +40,17 @@ if db_functions.check('gen7'):
     db_functions.add_gen('gen7',api.get_gen7())
 if db_functions.check('berry'):
     print("ADDING BERRIES...")
-    db_functions.add_berry(api.get_berries())
+    db_functions.add_item('berry',api.get_berries())
+if db_functions.check('item'):
+    print("ADDING ITEMS...")
+    db_functions.add_item('item',api.get_items())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
 #print(mons)
 print(len(mons))
-berries = db_functions.retrieve_berry()
-print(berries)
+berries = db_functions.retrieve_item('berry') + db_functions.retrieve_item('item')
+
 
 def get_monname(name):
     name = name.lower().strip()
@@ -61,10 +64,11 @@ def get_monid(pokemon_id):
     for pokemon in mons:
         if pokemon[1] == pokemon_id:
             return pokemon
-        #for n in pokemon:
-        #    if n == pokemon_id:
-        #        return pokemon
     return False
+
+def revers(lst): 
+    new_lst = lst[::-1] 
+    return new_lst 
 
 def get_montypes(types):
     ans = []
@@ -80,7 +84,6 @@ types = ['normal','fighting','flying','poison','ground','rock','bug','ghost','st
 
 @app.route('/')
 def index():
-    # add the if request args stuff djfadjfh
     print(request.args)
     if request.args:
         s = request.args.get('sort')
@@ -227,10 +230,28 @@ def lose():
 
 @app.route('/items')
 def items():
-    user = 'null'
+    user ="null"  #this isn't working, the page always has the logout button
     if 'user' in session:
         user = session['user']
-    return render_template('item.html',item=berries)
+    if request.args:
+        print(request.args)
+        print(len(berries))
+        i = request.args.get('sort')
+        if i == 'balls':
+            item = revers(berries[98:113])
+        elif i == 'potions':
+            item = revers(berries[85:98])
+        elif i == 'misc':
+            item = revers(berries[64:85])
+        elif i == 'default':
+            item = revers(berries)
+        elif i == 'berry':
+            item = berries[0:64]
+        else:
+            item = berries
+    else:
+        item = berries
+    return render_template('item.html',item=item)
 
 
 if __name__ == "__main__":

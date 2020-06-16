@@ -4,7 +4,7 @@
 Homepage
 {% endblock %}
 {% block stylesheet %}
-  <link rel="stylesheet" type= "text/css"href="{{ url_for('static',filename='styles/homepage.css') }}">
+
 {% endblock %}
 {%block navcontents%}
 {% if user == 'null' %}
@@ -45,6 +45,26 @@ Homepage
     <div class="container-fluid m-2 p-2 text-center">
       <div class="row">
         <div class="col-lg align-self-center">
+
+	   <form method="GET" action="/items" id="sorts">
+               <div class="form-row align-items-center">
+		 <div class="col-auto">
+                   <button class="btn btn-secondary" type="submit">Choose Item</button>
+		 </div>
+		 <div class="col-auto">
+                   <select class="form-control" name="sort" id="sort" form="sorts">
+		     <!--
+			 <option value="random">Shuffle Items</option>  -->
+		     <option value="default">Show All</option>
+                     <option value="berry">Berries</option>
+		     <option value="balls">Pokeballs</option>
+		     <option value="potions">Potions/Revives</option>
+		     <option value="misc">Miscellaneous</option>
+                   </select>
+		 </div>
+               </div>
+             </form>
+	  
         </div>
       </div>
     </div>
@@ -67,7 +87,7 @@ Homepage
       //var p = t - 19;
       var p = 0;
       //while (t >= p) {
-      while (p < 64) {
+      while (p < berries.length) {
 	  if(perrow == 0){
 	      row =  document.createElement("DIV");
 	      row.setAttribute("class", "row");
@@ -148,6 +168,15 @@ Homepage
 	      perrow = 0;
 	  }
       };
+      if(perrow > 0) {
+	  while(perrow<=4){
+	      var hcol = document.createElement("DIV");
+	      hcol.setAttribute("class", "col my-2");
+	      row.append(hcol);
+	      perrow++
+	  }
+	  container.appendChild(row);
+      }
   };
 
   display()

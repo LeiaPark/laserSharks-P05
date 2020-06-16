@@ -24,6 +24,7 @@ def create():
     create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
     create_table_berry = "CREATE TABLE IF NOT EXISTS berry(name TEXT, desc TEXT, image TEXT, cost INTEGER);"
+    create_table_items = "CREATE TABLE IF NOT EXISTS item(name TEXT, desc TEXT, image TEXT, cost INTEGER);"
 
     
     c.execute(create_table_users)
@@ -39,6 +40,7 @@ def create():
     c.execute(create_table_gen6)
     c.execute(create_table_gen7)
     c.execute(create_table_berry)
+    c.execute(create_table_items)
 
     db.commit()  # save changes
     db.close()  # close database
@@ -166,19 +168,19 @@ def retrieve_gen(gen):
     db.close()
     return genmons
 
-def add_berry(berry):
+def add_item(num,item):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    for b in berry:
-        c.execute("INSERT INTO berry(name, desc, image, cost) VALUES(?,?,?,?);", (b[0],b[1],b[2],b[3]))
+    for b in item:
+        c.execute("INSERT INTO " + num + "(name, desc, image, cost) VALUES(?,?,?,?);", (b[0],b[1],b[2],b[3]))
     db.commit()
     db.close()
 
-def retrieve_berry():
+def retrieve_item(item):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     berry = []
-    c.execute("SELECT * FROM berry;")
+    c.execute("SELECT * FROM " + item + ";")
     temp = []
     for b in c.fetchall():
         temp.append(b[0])
@@ -190,3 +192,5 @@ def retrieve_berry():
     db.commit()
     db.close()
     return berry
+
+

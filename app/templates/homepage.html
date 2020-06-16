@@ -131,16 +131,16 @@ Homepage
       var row;
       var p = t - 19;
       while (t >= p) {
-    if(perrow == 0){
-      row =  document.createElement("DIV");
-      row.setAttribute("class", "row");
-    }
-    var outerbutton = document.createElement("BUTTON");
-    var form = document.createElement("FORM");
-    var col = document.createElement("DIV");
-    var card = document.createElement("DIV");
-    var cardhead = document.createElement("H5");
-    var cardbody = document.createElement("DIV");
+	  if(perrow == 0){
+	      row =  document.createElement("DIV");
+	      row.setAttribute("class", "row");
+	  }
+	  var outerbutton = document.createElement("BUTTON");
+	  var form = document.createElement("FORM");
+	  var col = document.createElement("DIV");
+	  var card = document.createElement("DIV");
+	  var cardhead = document.createElement("H5");
+	  var cardbody = document.createElement("DIV");
 	  var name = document.createElement("P");
 	  var image = document.createElement("IMG");
 	  var types = document.createElement("P");
@@ -155,34 +155,34 @@ Homepage
 	  //console.log(ty.split(' '));
 	  image.setAttribute("value",id);
 	  image.setAttribute("src", i);
-    image.setAttribute("class", "card-img-top");
-    image.setAttribute("height", "auto");
-    image.setAttribute("width", "auto");
-    form.setAttribute("method", "GET");
-    form.setAttribute("action", "/search");
+	  image.setAttribute("class", "card-img-top");
+	  image.setAttribute("height", "auto");
+	  image.setAttribute("width", "auto");
+	  form.setAttribute("method", "GET");
+	  form.setAttribute("action", "/search");
 	  types.innerHTML = ty;
 	  button.innerHTML = "Add to Favorites";
 	  button.setAttribute("value",id);
 	  button.setAttribute("class", "btn btn-outline-success");
-    col.setAttribute("class", "col my-2");
-    card.setAttribute("class", "card");
-    outerbutton.setAttribute("type", "submit");
-    outerbutton.setAttribute("value", n);
-    outerbutton.setAttribute("name", "keyword");
-    outerbutton.setAttribute("class", "btn btn-outline-warning");
-    outerbutton.setAttribute("id", "picbutton");
-    outerbutton.setAttribute("style", "width:100%;");
-    cardbody.setAttribute("class", "card-body text-center");
-    cardhead.setAttribute("class", "card-title text-center");
-    badges.setAttribute("class", "container m-2")
-    var cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  col.setAttribute("class", "col my-2");
+	  card.setAttribute("class", "card");
+	  outerbutton.setAttribute("type", "submit");
+	  outerbutton.setAttribute("value", n);
+	  outerbutton.setAttribute("name", "keyword");
+	  outerbutton.setAttribute("class", "btn btn-outline-warning");
+	  outerbutton.setAttribute("id", "picbutton");
+	  outerbutton.setAttribute("style", "width:100%;");
+	  cardbody.setAttribute("class", "card-body text-center");
+	  cardhead.setAttribute("class", "card-title text-center");
+	  badges.setAttribute("class", "container m-2")
+	  var cn = n.charAt(0).toUpperCase() + n.slice(1);
 	  if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  else { cardhead.innerHTML = cn + "   " + "#" + id; }
-    outerbutton.appendChild(image);
-    form.appendChild(outerbutton);
-    card.appendChild(form);
-    cardbody.appendChild(cardhead);
+	  outerbutton.appendChild(image);
+	  form.appendChild(outerbutton);
+	  card.appendChild(form);
+	  cardbody.appendChild(cardhead);
 
 	  var get_type = function(type) {
 	      if (type === "normal") return "badge-normal";
@@ -215,10 +215,10 @@ Homepage
 	      badges.appendChild(badge);
 	  };
 
-    cardbody.appendChild(badges);
-    cardbody.appendChild(button);
-    card.appendChild(cardbody);
-    col.appendChild(card);
+	  cardbody.appendChild(badges);
+	  cardbody.appendChild(button);
+	  card.appendChild(cardbody);
+	  col.appendChild(card);
 	  t = t - 1;
 	  button.onclick = function() {
 	      var form = document.getElementById("f");
@@ -229,13 +229,22 @@ Homepage
 	      });
 	      button.disabled = true;
 	  };
-    row.appendChild(col);
-    perrow++
-    if(perrow>=5){
-      container.appendChild(row);
-      perrow = 0;
-    }
-  };
+	  row.appendChild(col);
+	  perrow++
+	  if(perrow>=5){
+	      container.appendChild(row);
+	      perrow = 0;
+	  }
+      };
+      if(perrow > 0) {
+	  while(perrow<=4){
+	      var hcol = document.createElement("DIV");
+	      hcol.setAttribute("class", "col my-2");
+	      row.append(hcol);
+	      perrow++
+	  }
+	  container.appendChild(row);
+      }
   };
 
 
@@ -358,7 +367,16 @@ Homepage
       container.appendChild(row);
       perrow = 0;
     };
-  };
+      };
+      if(perrow > 0) {
+	  while(perrow<=4){
+	      var hcol = document.createElement("DIV");
+	      hcol.setAttribute("class", "col my-2");
+	      row.append(hcol);
+	      perrow++
+	  }
+	  container.appendChild(row);
+      }
 };
 
   display()
