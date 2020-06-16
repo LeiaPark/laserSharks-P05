@@ -299,14 +299,10 @@ document.addEventListener('webkitfullscreenchange', function() {
 	<div id="preload">
 		<button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">SELECT</button>
 		<input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
-		<button onclick="document.getElementById('saveloader').click()">Upload Savegame</button>
-		<input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);">
 	</div>
 	<div id="ingame" class="hidden">
 		<button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button>
 		<button class="bigbutton" onclick="reset()">RESET</button>
-		<button onclick="gba.downloadSavedata()">Download Savegame</button>
-		<button onclick="screenshot()">Screenshot</button>
 		<label id="pixelated"><input type="checkbox" onchange="setPixelated(this.checked)"> Pixelated</label>
 		<div id="sound">
 			<p>Sound</p>
