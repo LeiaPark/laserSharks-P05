@@ -66,9 +66,9 @@ def get_monid(pokemon_id):
             return pokemon
     return False
 
-def revers(lst): 
-    new_lst = lst[::-1] 
-    return new_lst 
+def revers(lst):
+    new_lst = lst[::-1]
+    return new_lst
 
 def get_montypes(types):
     ans = []
@@ -200,7 +200,7 @@ def logout():
 def game():
     if 'user' in session:
         session['randompokemon'] = mons[randint(0, len(mons) - 1)]
-        print(session['randompokemon'])
+        #print(session['randompokemon'])
         return render_template('game.html', mon = session['randompokemon'])
     else:
         return redirect(url_for('login'))
@@ -252,8 +252,32 @@ def items():
     else:
         item = berries
     return render_template('item.html',item=item)
+@app.route('/access', methods=['GET', 'POST'])
+def access():
+    if 'user' in session:
+        if 'gamepass' in session:
+            return redirect(url_for('emulator'))
+        elif request.args:
+            if request.args.get('gamepass') == "gottacatchthemall":
+                session['gamepass'] = "yes"
+                return redirect(url_for('emulator'))
+            else:
+                flash("Wrong Password. Check Under")
+        return render_template('access.html')
+    else:
+        return redirect(url_for('login'))
 
+@app.route('/emulator')
+def emulator():
+    if 'user' in session:
+        return render_template('emulator_package/emulator.html')
+    else:
+        return redirect(url_for('login'))
 
+@app.route('/pop')
+def pop():
+    session.pop('gamepass', None)
+    return redirect(url_for('access'))
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()

@@ -1,0 +1,22 @@
+body {
+    background-image: url(../img/access.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+#bg {
+  width: 100%;
+}
+
+.card {
+  background-color: rgba(168, 50, 162,0.7) !important;
+  width: 50%;
+  margin-top: 150px;
+}
+
+#hint_gamepass {
+  color: rgba(168, 50, 162,0.0) !important;
+}
