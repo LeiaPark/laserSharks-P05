@@ -55,14 +55,14 @@ Search
   <div class="row row-cols-2">
     <div class="col">
       <div class="card text-center p-5">
-        <img id="front_default" class="card-img-top" width="150px"></img>
-	<img id="front_shiny" class="card-img-top" width="150px" style="display:none" /></img>
-	<img id="back_default" class="card-img-top" width="150px" style="display:none" /></img>
-	<img id="back_shiny" class="card-img-top" width="150px" style="display:none" /></img>
+        <img id="front_default" class="card-img-top" width="150px">
+	<img id="front_shiny" class="card-img-top" width="150px" style="display:none" />
+	<img id="back_default" class="card-img-top" width="150px" style="display:none" />
+	<img id="back_shiny" class="card-img-top" width="150px" style="display:none" />
 
-	<button id="shiny">Shiny </button>
-	<button id="view">Back ⟲</button>
-	
+	<button class="btn btn-warning" id="shiny">Shiny </button>
+	<button class="btn btn-danger" id="view">Switch to Back ⟲</button>
+
         <div class="card-body">
           <h1 class="card-title">Searches for: {{ search }}</h1>
           <hr>
@@ -165,6 +165,7 @@ Search
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
 	  shinybutton.innerHTML = 'Shiny';
+    shinybutton.setAttribute('class', 'btn btn-warning');
 	  set = true;
       }
       else if (set && !vset) {
@@ -173,6 +174,7 @@ Search
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:block');
 	  shinybutton.innerHTML = 'Default';
+    shinybutton.setAttribute('class', 'btn btn-secondary');
 	  set = false;
       }
       else if (vset && set) {
@@ -181,6 +183,7 @@ Search
 	  f_shiny.setAttribute('style','display:block');
 	  b_shiny.setAttribute('style','display:none');
 	  shinybutton.innerHTML = 'Default';
+    shinybutton.setAttribute('class', 'btn btn-secondary');
 	  set = false;
       }
       else {
@@ -189,6 +192,7 @@ Search
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
 	  shinybutton.innerHTML = 'Shiny';
+    shinybutton.setAttribute('class', 'btn btn-warning');
 	  set = true;
       }
   }
@@ -198,7 +202,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:block');
-	  viewbutton.innerHTML = 'Front ⟳';
+	  viewbutton.innerHTML = 'Switch to Front ⟳';
+    viewbutton.setAttribute('class', 'btn btn-success');
 	  vset = false;
       }
       else if (!vset && set) {
@@ -206,7 +211,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Back ⟲ ';
+	  viewbutton.innerHTML = 'Switch to Back ⟲ ';
+    viewbutton.setAttribute('class', 'btn btn-danger');
 	  vset = true;
       }
       else if (vset && set) {
@@ -214,7 +220,8 @@ Search
 	  b_default.setAttribute('style','display:block');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Front ⟳';
+	  viewbutton.innerHTML = 'Switch to Front ⟳';
+    viewbutton.setAttribute('class', 'btn btn-success');
 	  vset = false;
       }
       else {
@@ -222,14 +229,15 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:block');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Back ⟲';
+	  viewbutton.innerHTML = 'Switch to Back ⟲';
+    viewbutton.setAttribute('class', 'btn btn-danger');
 	  vset = true;
       }
   }
   viewbutton.addEventListener('click',view_switch);
   shinybutton.addEventListener('click', shiny_switch);
 
-  
+
   var get_type = function(type) {
       if (type === "normal") return "badge-normal";
       else if (type === "fighting") return "badge-fighting";
