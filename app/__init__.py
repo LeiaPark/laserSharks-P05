@@ -270,7 +270,7 @@ def access():
 @app.route('/emulator')
 def emulator():
     if 'user' in session:
-        return render_template('emulator_package/emulator.html')
+        return render_template('emulator.html')
     else:
         return redirect(url_for('login'))
 

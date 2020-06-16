@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GBA.js Debugger</title>
-<script src="js/util.js"></script>
-<script src="resources/console.js"></script>
-<link href="resources/console.css" rel="stylesheet">
+<script src="{{ url_for('static',filename='js/util.js') }}"></script>
+<script src="{{ url_for('static',filename='resources/console.js') }}"></script>
+<link href="{{ url_for('static',filename='styles/console.css') }}" rel="stylesheet">
 <script>
 window.onmessage = function(message) {
 	if (message.origin != document.domain && (message.origin != 'file://' || document.domain)) {

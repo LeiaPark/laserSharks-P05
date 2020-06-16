@@ -1,26 +1,26 @@
-
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GBA.js</title>
-<link rel="stylesheet" href="resources/main.css">
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<script src="js/util.js"></script>
-<script src="js/core.js"></script>
-<script src="js/arm.js"></script>
-<script src="js/thumb.js"></script>
-<script src="js/mmu.js"></script>
-<script src="js/io.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/video.js"></script>
-<script src="js/video/proxy.js"></script>
-<script src="js/video/software.js"></script>
-<script src="js/irq.js"></script>
-<script src="js/keypad.js"></script>
-<script src="js/savedata.js"></script>
-<script src="js/gpio.js"></script>
-<script src="js/gba.js"></script>
-<script src="resources/xhr.js"></script>
+<script src="{{ url_for('static',filename='js/util.js') }}"></script>
+<script src="{{ url_for('static',filename='js/core.js') }}"></script>
+<script src="{{ url_for('static',filename='js/arm.js') }}"></script>
+<script src="{{ url_for('static',filename='js/thumb.js') }}"></script>
+<script src="{{ url_for('static',filename='js/mmu.js') }}"></script>
+<script src="{{ url_for('static',filename='js/io.js') }}"></script>
+<script src="{{ url_for('static',filename='js/audio.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video/proxy.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video/software.js') }}"></script>
+<script src="{{ url_for('static',filename='js/irq.js') }}"></script>
+<script src="{{ url_for('static',filename='js/keypad.js') }}"></script>
+<script src="{{ url_for('static',filename='js/savedata.js') }}"></script>
+<script src="{{ url_for('static',filename='js/gpio.js') }}"></script>
+<script src="{{ url_for('static',filename='js/gba.js') }}"></script>
+<script src="{{ url_for('static',filename='resources/xhr.js') }}"></script>
 
 <script>
 var gba;
@@ -39,7 +39,7 @@ try {
 		}
 		var crash = document.createElement('img');
 		crash.setAttribute('id', 'crash');
-		crash.setAttribute('src', 'resources/crash.png');
+		crash.setAttribute('src', "{{ url_for('static',filename='img/crash.png') }}");
 		screen.parentElement.insertBefore(crash, screen);
 		screen.setAttribute('class', 'dead');
 	});
@@ -58,7 +58,7 @@ window.onload = function() {
 			counter.textContent = Math.floor(fps);
 		};
 
-		loadRom('resources/bios.bin', function(bios) {
+		loadRom("{{ url_for('static',filename='resources/bios.bin') }}", function(bios) {
 			gba.setBios(bios);
 		});
 

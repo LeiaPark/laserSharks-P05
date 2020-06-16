@@ -1,25 +1,26 @@
+<!DOCTYPE html>
 <html>
 <head>
-<script src="js/util.js"></script>
-<script src="js/core.js"></script>
-<script src="js/arm.js"></script>
-<script src="js/thumb.js"></script>
-<script src="js/mmu.js"></script>
-<script src="js/io.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/video.js"></script>
-<script src="js/video/proxy.js"></script>
-<script src="js/video/software.js"></script>
-<script src="js/irq.js"></script>
-<script src="js/keypad.js"></script>
-<script src="js/sio.js"></script>
-<script src="js/savedata.js"></script>
-<script src="js/gpio.js"></script>
-<script src="js/gba.js"></script>
+<script src="{{ url_for('static',filename='js/util.js') }}"></script>
+<script src="{{ url_for('static',filename='js/core.js') }}"></script>
+<script src="{{ url_for('static',filename='js/arm.js') }}"></script>
+<script src="{{ url_for('static',filename='js/thumb.js') }}"></script>
+<script src="{{ url_for('static',filename='js/mmu.js') }}"></script>
+<script src="{{ url_for('static',filename='js/io.js') }}"></script>
+<script src="{{ url_for('static',filename='js/audio.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video/proxy.js') }}"></script>
+<script src="{{ url_for('static',filename='js/video/software.js') }}"></script>
+<script src="{{ url_for('static',filename='js/irq.js') }}"></script>
+<script src="{{ url_for('static',filename='js/keypad.js') }}"></script>
+<script src="{{ url_for('static',filename='js/sio.js') }}"></script>
+<script src="{{ url_for('static',filename='js/savedata.js') }}"></script>
+<script src="{{ url_for('static',filename='js/gpio.js') }}"></script>
+<script src="{{ url_for('static',filename='js/gba.js') }}"></script>
 
-<script src="resources/xhr.js"></script>
-<script src="resources/console.js"></script>
-<link href="resources/console.css" rel="stylesheet">
+<script src="{{ url_for('static',filename='resources/xhr.js') }}"></script>
+<script src="{{ url_for('static',filename='resources/console.js') }}"></script>
+<link href="{{ url_for('static',filename='styles/console.css') }}" rel="stylesheet">
 <script>
 function runTest(r) {
 	core.setRom(r);
@@ -72,7 +73,7 @@ window.onload = function() {
 	gbaCon = new Console(core);
 	core.DEBUG("Logging begun!");
 	core.DEBUG("Loading BIOS...");
-	loadRom('resources/bios.bin', function(bios) {
+	loadRom({{ url_for('static',filename='resources/bios.bin') }}, function(bios) {
 		core.setBios(bios, false);
 		core.DEBUG("BIOS loaded!");
 		gbaCon.memory.refreshAll();

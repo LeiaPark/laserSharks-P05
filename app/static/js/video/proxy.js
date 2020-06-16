@@ -63,7 +63,7 @@ MemoryProxy.prototype.store32 = function(offset, value) {
 MemoryProxy.prototype.invalidatePage = function(address) {};
 
 function GameBoyAdvanceRenderProxy() {
-	this.worker = new Worker('js/video/worker.js');
+	this.worker = new Worker('static/js/video/worker.js');
 
 	this.currentFrame = 0;
 	this.delay = 0;

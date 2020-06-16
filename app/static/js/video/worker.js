@@ -1,3 +1,4 @@
+
 importScripts('software.js');
 
 var video = new GameBoyAdvanceSoftwareRenderer();
