@@ -136,7 +136,11 @@ Homepage
 	  //if (id < 10) { cardhead.innerHTML = cn + "   " + "#00" + id; }
 	  //else if (id >= 10 && id < 100) { cardhead.innerHTML = cn + "   " + "#0" + id; }
 	  //else { cardhead.innerHTML = cn + "   " + "#" + id; }
-	  var cn = n.charAt(0).toUpperCase() + n.slice(1);
+	  const capitalize = (str, lower = false) =>
+		(lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
+	  ;
+	  var cn = n.replace("-"," ");
+	  cn = capitalize(cn);
 	  cardhead.innerHTML = cn;
 	  desc.innerHTML = des;
 	  //cardhead.appendChild(desc);
