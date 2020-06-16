@@ -60,3 +60,8 @@ connorO -- 2020-06-14 21:57
 aliceN -- 2020-06-15 22:27
 - Added buttons for user to toggle between shiny/front/backview of pokemon
 - Added items page
+
+leiaP -- 2020-06-16 08:45
+- Modified a Game Boy Advance (GBA) Emulator for easy transition into web app
+- Added GBA Emulator in repo as package within templates folder
+- Added Pokemon Game .gba "Pokemon FireRed" within app folder
