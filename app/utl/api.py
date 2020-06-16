@@ -29,7 +29,22 @@ def get_gen1():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        #temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -61,7 +76,21 @@ def get_gen2():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -94,7 +123,21 @@ def get_gen3():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -127,7 +170,21 @@ def get_gen4():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -160,7 +217,21 @@ def get_gen5():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -193,7 +264,21 @@ def get_gen6():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -216,8 +301,6 @@ def get_gen7():
     response = urlopen(request).read()
     data = json.loads(response)
     d = []
-    ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name, id, picture'''
     temp = [] #holds the information while parsing through pokemons
     m = 87
     while m >= 0:
@@ -226,7 +309,21 @@ def get_gen7():
         mondata = [json.loads(mon)]
         temp.append(data['results'][m]['name'])
         temp.append(mondata[0]['id'])
+        
         temp.append(mondata[0]['sprites']['front_default'])
+        if mondata[0]['sprites']['back_default'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_default'])
+        if mondata[0]['sprites']['front_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['front_shiny'])
+        if mondata[0]['sprites']['back_shiny'] == None:
+            temp.append(mondata[0]['sprites']['front_default'])
+        else:
+            temp.append(mondata[0]['sprites']['back_shiny'])
+            
         l = len(mondata[0]['types'])
         typ = ''
         for x in range(l):
@@ -243,3 +340,47 @@ def get_gen7():
         temp = []
         m = m - 1
     return d
+
+def get_berries():
+    request = Request("https://pokeapi.co/api/v2/berry/?offset=0&limit=64", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    m = 63
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        b = urlopen(w).read()
+        be = json.loads(b)
+        ber = Request(be['item']['url'], headers=headers)
+        berr = urlopen(ber).read()
+        berry = json.loads(berr)
+        temp = []
+        temp.append(data['results'][m]['name']);
+        temp.append(berry['flavor_text_entries'][0]['text'])
+        temp.append(berry['sprites']['default'])
+        temp.append(berry['cost'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+
+def get_items():
+    request = Request("https://pokeapi.co/api/v2/item/?offset=0&limit=50", headers=headers)
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    m = 49
+    while m >= 0:  
+        w = Request(data['results'][m]['url'], headers=headers)
+        items = urlopen(w).read()
+        itemdata = json.loads(items)
+        temp = []
+        temp.append(data['results'][m]['name'])
+        temp.append(itemdata['flavor_text_entries'][0]['text'])
+        temp.append(itemdata['sprites']['default'])
+        temp.append(itemdata['cost'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+        

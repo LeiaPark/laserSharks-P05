@@ -16,14 +16,17 @@ def create():
     create_table_favorites = "CREATE TABLE IF NOT EXISTS favorites(user_id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT);"
     insert_favorites = "INSERT OR IGNORE INTO favorites(user_id, list) VALUES( 1, \"1\");"
 
-    create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen4 = "CREATE TABLE IF NOT EXISTS gen4(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
-    create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, image TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen1 = "CREATE TABLE IF NOT EXISTS gen1(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen2 = "CREATE TABLE IF NOT EXISTS gen2(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen3 = "CREATE TABLE IF NOT EXISTS gen3(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen4 = "CREATE TABLE IF NOT EXISTS gen4(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen5 = "CREATE TABLE IF NOT EXISTS gen5(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen6 = "CREATE TABLE IF NOT EXISTS gen6(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_gen7 = "CREATE TABLE IF NOT EXISTS gen7(name TEXT, pokemon_id INTEGER, front_default TEXT, back_default TEXT, front_shiny TEXT, back_shiny TEXT, types TEXT, weight INTEGER, height INTEGER, stats TEXT);"
+    create_table_berry = "CREATE TABLE IF NOT EXISTS berry(name TEXT, desc TEXT, image TEXT, cost INTEGER);"
+    create_table_items = "CREATE TABLE IF NOT EXISTS item(name TEXT, desc TEXT, image TEXT, cost INTEGER);"
 
+    
     c.execute(create_table_users)
     c.execute(insert_user)
     c.execute(create_table_favorites)
@@ -36,6 +39,8 @@ def create():
     c.execute(create_table_gen5)
     c.execute(create_table_gen6)
     c.execute(create_table_gen7)
+    c.execute(create_table_berry)
+    c.execute(create_table_items)
 
     db.commit()  # save changes
     db.close()  # close database
@@ -136,7 +141,7 @@ def add_gen(num,gen):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     for pokemon in gen:
-        c.execute("INSERT INTO " + num + "(name, pokemon_id, image, types, weight, height, stats) VALUES(?,?,?,?,?,?,?);", (pokemon[0],pokemon[1],pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6]))
+        c.execute("INSERT INTO " + num + "(name, pokemon_id, front_default, back_default, front_shiny, back_shiny, types, weight, height, stats) VALUES(?,?,?,?,?,?,?,?,?,?);", (pokemon[0],pokemon[1],pokemon[2],pokemon[3],pokemon[4],pokemon[5],pokemon[6],pokemon[7],pokemon[8],pokemon[9]))
     db.commit()
     db.close()
 
@@ -154,8 +159,38 @@ def retrieve_gen(gen):
         temp.append(pokemon[4])
         temp.append(pokemon[5])
         temp.append(pokemon[6])
+        temp.append(pokemon[7])
+        temp.append(pokemon[8])
+        temp.append(pokemon[9])
         genmons.append(temp)
         temp = []
     db.commit()
     db.close()
     return genmons
+
+def add_item(num,item):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    for b in item:
+        c.execute("INSERT INTO " + num + "(name, desc, image, cost) VALUES(?,?,?,?);", (b[0],b[1],b[2],b[3]))
+    db.commit()
+    db.close()
+
+def retrieve_item(item):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    berry = []
+    c.execute("SELECT * FROM " + item + ";")
+    temp = []
+    for b in c.fetchall():
+        temp.append(b[0])
+        temp.append(b[1])
+        temp.append(b[2])
+        temp.append(b[3])
+        berry.append(temp)
+        temp = []
+    db.commit()
+    db.close()
+    return berry
+
+

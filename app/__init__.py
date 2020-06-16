@@ -38,11 +38,20 @@ if db_functions.check('gen6'):
 if db_functions.check('gen7'):
     print("ADDING GENERATION 7...")
     db_functions.add_gen('gen7',api.get_gen7())
+if db_functions.check('berry'):
+    print("ADDING BERRIES...")
+    db_functions.add_item('berry',api.get_berries())
+if db_functions.check('item'):
+    print("ADDING ITEMS...")
+    db_functions.add_item('item',api.get_items())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
+#print(mons)
 print(len(mons))
-randompokemon=[]
+berries = db_functions.retrieve_item('berry') + db_functions.retrieve_item('item')
+
+
 def get_monname(name):
     name = name.lower().strip()
     for pokemon in mons:
@@ -55,15 +64,16 @@ def get_monid(pokemon_id):
     for pokemon in mons:
         if pokemon[1] == pokemon_id:
             return pokemon
-        #for n in pokemon:
-        #    if n == pokemon_id:
-        #        return pokemon
     return False
+
+def revers(lst): 
+    new_lst = lst[::-1] 
+    return new_lst 
 
 def get_montypes(types):
     ans = []
     for pokemon in mons:
-        t = pokemon[3].split()
+        t = pokemon[6].split()
         for x in t:
             if x == types:
                 ans.append(pokemon)
@@ -74,10 +84,8 @@ types = ['normal','fighting','flying','poison','ground','rock','bug','ghost','st
 
 @app.route('/')
 def index():
-    # add the if request args stuff djfadjfh
     print(request.args)
     if request.args:
-        print(request.args)
         s = request.args.get('sort')
         if s in gens:
             pokemon = db_functions.retrieve_gen(request.args.get('sort'))
@@ -85,6 +93,8 @@ def index():
             pokemon = get_montypes(s)
         elif s == 'default':
             pokemon = mons
+        elif s == 'random':
+            pokemon = random.sample(mons, len(mons));
     else:
         pokemon = mons
     user="null"
@@ -217,6 +227,33 @@ def lose():
         session.pop('answer', None)
         return render_template('lose.html', mon = session['randompokemon'])
     return redirect(url_for("game"))
+
+@app.route('/items')
+def items():
+    user ="null"  #this isn't working, the page always has the logout button
+    if 'user' in session:
+        user = session['user']
+    if request.args:
+        print(request.args)
+        print(len(berries))
+        i = request.args.get('sort')
+        if i == 'balls':
+            item = revers(berries[98:113])
+        elif i == 'potions':
+            item = revers(berries[85:98])
+        elif i == 'misc':
+            item = revers(berries[64:85])
+        elif i == 'default':
+            item = revers(berries)
+        elif i == 'berry':
+            item = berries[0:64]
+        else:
+            item = berries
+    else:
+        item = berries
+    return render_template('item.html',item=item)
+
+
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()
