@@ -66,8 +66,8 @@ Search
 	<img id="back_default" class="card-img-top" width="150px" style="display:none" />
 	<img id="back_shiny" class="card-img-top" width="150px" style="display:none" />
 
-	<button class="btn btn-warning" id="shiny">Shiny </button>
-	<button class="btn btn-danger" id="view">Switch to Back ⟲</button>
+	<button class="btn btn-secondary" id="shiny">Default</button>
+	<button class="btn btn-success" id="view">Front ⟲</button>
 
         <div class="card-body">
           <h1 class="card-title">Searches for: {{ search }}</h1>
@@ -170,8 +170,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  shinybutton.innerHTML = 'Shiny';
-    shinybutton.setAttribute('class', 'btn btn-warning');
+	  shinybutton.innerHTML = 'Default';
+    shinybutton.setAttribute('class', 'btn btn-secondary');
 	  set = true;
       }
       else if (set && !vset) {
@@ -179,8 +179,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:block');
-	  shinybutton.innerHTML = 'Default';
-    shinybutton.setAttribute('class', 'btn btn-secondary');
+	  shinybutton.innerHTML = 'Shiny';
+    shinybutton.setAttribute('class', 'btn btn-warning');
 	  set = false;
       }
       else if (vset && set) {
@@ -188,8 +188,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:block');
 	  b_shiny.setAttribute('style','display:none');
-	  shinybutton.innerHTML = 'Default';
-    shinybutton.setAttribute('class', 'btn btn-secondary');
+	  shinybutton.innerHTML = 'Shiny';
+    shinybutton.setAttribute('class', 'btn btn-warning');
 	  set = false;
       }
       else {
@@ -197,8 +197,8 @@ Search
 	  b_default.setAttribute('style','display:block');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  shinybutton.innerHTML = 'Shiny';
-    shinybutton.setAttribute('class', 'btn btn-warning');
+	  shinybutton.innerHTML = 'Default';
+    shinybutton.setAttribute('class', 'btn btn-secondary');
 	  set = true;
       }
   }
@@ -208,8 +208,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:block');
-	  viewbutton.innerHTML = 'Switch to Front ⟳';
-    viewbutton.setAttribute('class', 'btn btn-success');
+	  viewbutton.innerHTML = 'Back ⟳';
+    viewbutton.setAttribute('class', 'btn btn-danger');
 	  vset = false;
       }
       else if (!vset && set) {
@@ -217,8 +217,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Switch to Back ⟲ ';
-    viewbutton.setAttribute('class', 'btn btn-danger');
+	  viewbutton.innerHTML = 'Front ⟲ ';
+    viewbutton.setAttribute('class', 'btn btn-success');
 	  vset = true;
       }
       else if (vset && set) {
@@ -226,8 +226,8 @@ Search
 	  b_default.setAttribute('style','display:block');
 	  f_shiny.setAttribute('style','display:none');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Switch to Front ⟳';
-    viewbutton.setAttribute('class', 'btn btn-success');
+	  viewbutton.innerHTML = 'Back ⟳';
+    viewbutton.setAttribute('class', 'btn btn-danger');
 	  vset = false;
       }
       else {
@@ -235,8 +235,8 @@ Search
 	  b_default.setAttribute('style','display:none');
 	  f_shiny.setAttribute('style','display:block');
 	  b_shiny.setAttribute('style','display:none');
-	  viewbutton.innerHTML = 'Switch to Back ⟲';
-    viewbutton.setAttribute('class', 'btn btn-danger');
+	  viewbutton.innerHTML = 'Front ⟲';
+    viewbutton.setAttribute('class', 'btn btn-success');
 	  vset = true;
       }
   }
