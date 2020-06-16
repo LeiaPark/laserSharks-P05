@@ -38,12 +38,17 @@ if db_functions.check('gen6'):
 if db_functions.check('gen7'):
     print("ADDING GENERATION 7...")
     db_functions.add_gen('gen7',api.get_gen7())
+if db_functions.check('berry'):
+    print("ADDING BERRIES...")
+    db_functions.add_berry(api.get_berries())
 
 mons = db_functions.retrieve_gen('gen7') + db_functions.retrieve_gen('gen6') + db_functions.retrieve_gen('gen5') + db_functions.retrieve_gen('gen4') + db_functions.retrieve_gen('gen3') + db_functions.retrieve_gen('gen2') + db_functions.retrieve_gen('gen1')
 #mons = db_functions.retrieve_gen('gen1')
 #print(mons)
 print(len(mons))
-randompokemon=[]
+berries = db_functions.retrieve_berry()
+print(berries)
+
 def get_monname(name):
     name = name.lower().strip()
     for pokemon in mons:
@@ -219,6 +224,15 @@ def lose():
         session.pop('answer', None)
         return render_template('lose.html', mon = session['randompokemon'])
     return redirect(url_for("game"))
+
+@app.route('/items')
+def items():
+    user = 'null'
+    if 'user' in session:
+        user = session['user']
+    return render_template('item.html',item=berries)
+
+
 if __name__ == "__main__":
     app.debug = True
     db_functions.create()

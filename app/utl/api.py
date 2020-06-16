@@ -301,8 +301,6 @@ def get_gen7():
     response = urlopen(request).read()
     data = json.loads(response)
     d = []
-    ''' d is an array of arrays. Each array will have pokemon information in this order:
-                 name, id, picture'''
     temp = [] #holds the information while parsing through pokemons
     m = 87
     while m >= 0:
@@ -342,3 +340,28 @@ def get_gen7():
         temp = []
         m = m - 1
     return d
+
+def get_berries():
+    request = Request("https://pokeapi.co/api/v2/berry/?offset=0&limit=64", headers=headers) 
+    response = urlopen(request).read()
+    data = json.loads(response)
+    d = []
+    m = 63
+    while m >= 0:
+        w = Request(data['results'][m]['url'], headers=headers)
+        b = urlopen(w).read()
+        be = json.loads(b)
+        ber = Request(be['item']['url'], headers=headers)
+        #ber = be['item']['url']
+        berr = urlopen(ber).read()
+        berry = json.loads(berr)
+        temp = []
+        temp.append(data['results'][m]['name']);
+        temp.append(berry['flavor_text_entries'][0]['text'])
+        temp.append(berry['sprites']['default'])
+        temp.append(berry['cost'])
+        d.append(temp)
+        temp = []
+        m = m - 1
+    return d
+        
