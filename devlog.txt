@@ -49,6 +49,14 @@ connorO -- 2020-06-13 20:19
 -made navbar and footer sticky
 -added toasts for notifications
 
+connorO -- 2020-06-14 21:57
+-bootstrapped everything so far
+-coded who's that pokemon
+-fixed things in the search, favorites tab, and homepage:
+  *Adding favorite pokemon from search
+  *Made it so pokemon can show stats when clicked on
+  *Made it so colored types are shown in Favorites
+
 aliceN -- 2020-06-15 22:27
 - Added buttons for user to toggle between shiny/front/backview of pokemon
 - Added items page
