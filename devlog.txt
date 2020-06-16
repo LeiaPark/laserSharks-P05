@@ -48,3 +48,7 @@ connorO -- 2020-06-13 20:19
 -switched between logout and log in
 -made navbar and footer sticky
 -added toasts for notifications
+
+aliceN -- 2020-06-15 22:27
+- Added buttons for user to toggle between shiny/front/backview of pokemon
+- Added items page
