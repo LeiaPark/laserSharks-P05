@@ -1,5 +1,7 @@
 # PokeDex by Laser Sharks
 
+# VIDEO: https://www.youtube.com/watch?v=5QFc2ovdnFA
+
 ### Team Roster
 - Alice Ni: Back end API/data
 - Connor Oh: Front end bootstrap
